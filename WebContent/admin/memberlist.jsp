@@ -352,9 +352,9 @@
       </div>
    </div>
             
-            <ul class="navi">
+            <ul class="navi" style="position:absolute">
                 <ul class="title">
-                    <li class="navi-title"><a href="#" style="font-family: 'Rock Salt', cursive; font-size:20px;">
+                    <li class="navi-title"><a href="${uri }" style="font-family: 'Rock Salt', cursive; font-size:20px;">
                     Don't Give Up
                    
                     </a></li>
