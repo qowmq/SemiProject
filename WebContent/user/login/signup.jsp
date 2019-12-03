@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,15 @@
 <title>Insert title here</title>
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="js/main.js"></script>
+<!-- Font Icon -->
+<link rel="stylesheet"
+   href="${pageContext.request.contextPath }/user/login/colorlib-regform-7/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+<!-- Main css -->
+<link rel="stylesheet"
+   href="${pageContext.request.contextPath }/user/login/colorlib-regform-7/css/style.css">
 <link rel="stylesheet"
    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -17,263 +26,301 @@
 <link
    href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
    rel="stylesheet">
+
+<style>
+body {
+   margin: 0px;
+   padding: 0px;
+   background-color: #FFFFFF;
+}
+
+.lastbar {
+   margin: 0px;
+   overflow: hidden;
+   padding: 0px;
+}
+
+.navi {
+   position: fixed;
+   top: 0px;
+   margin: 0px;
+   overflow: hidden;
+   padding: 0px;
+   width: 60%;
+   left: 20%;
+   background-color: #FFFFFF90;
+   font-family: fantasy;
+   font-size: 20px;
+}
+
+.title {
+   margin: 0px;
+   padding: 0px;
+   width: 50%;
+}
+
+.itemList {
+   position: absolute;
+   margin: 0px;
+   padding: 0px;
+   right: 0px;
+   width: 50%;
+}
+
+.navi-title {
+   list-style-type: none;
+   width: 50%;
+   line-height: 72px;
+   float: left;
+   text-align: center;
+   color: black;
+}
+
+.navi-item {
+   list-style-type: none;
+   width: 30%;
+   line-height: 72px;
+   float: left;
+   text-align: center;
+   color: black;
+}
+
+.navi-item2 {
+   list-style-type: none;
+   width: 25%;
+   line-height: 30px;
+   float: left;
+   text-align: center;
+   color: black;
+}
+
+.navi-item3 {
+   list-style-type: none;
+   width: 25%;
+   line-height: 72px;
+   float: left;
+   text-align: center;
+   color: black;
+}
+
+.navi-item>a {
+   text-decoration: none;
+   color: black;
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+
+.navi-item2>a {
+   text-decoration: none;
+   color: black;
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+
+.navi-item3>a {
+   text-decoration: none;
+   color: black;
+   width: 100%;
+   height: 100%;
+   display: block;
+   font-weight: bold;
+}
+
+.navi-title>a {
+   text-decoration: none;
+   color: black;
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+
+.navi-item>a:hover {
+   background-color: orange;
+}
+
+.onefloor {
+   border-bottom: 3px solid black;
+   border-top: 3px solid black;
+   border-radius: 3px;
+}
+
+.twofloor {
+   border-bottom: 3px solid black;
+   border-radius: 3px;
+}
+
+.threefloor {
+   border-bottom: 3px solid black;
+   border-radius: 3px;
+   height: 50px;
+}
+
+.fivefloor {
+   border-top: 3px solid black;
+   border-radius: 3px;
+   width: 60%;
+   background-color: gainsboro;
+    margin: auto;
+}
+
+.progress {
+   display: inline-block;
+   width: 90%;
+   height: 10%;
+}
+
+.submenu {
+   font-family: 'Calistoga', cursive;
+   color: black;
+}
+
+.sidebar {
+   height: 51px;
+   font-family: 'Calistoga', cursive;
+   text-align: center;
+}
+
+.labelTag {
+   padding-left: 7px
+}
+
+.sidebar>a {
+   height: 100%;
+   color: #FFFFFF;
+}
+
+.fourthfloor {
+   height: 700px;
+}
+
+table {
+   border: 2px solid black;
+   margin: auto;
+   position: relative;
+   top: 120px;
+   height: 400px;
+   width: 500px;
+}
+
+th {
+   font-size: 30px;
+   text-align: center;
+}
+
+tr {
+   height: 25px;
+}
+
+#btnresult {
+   text-align: center;
+}
+
+.sub {
+   text-align: right;
+}
+
+#confirm {
+   background-color: black;
+   color: white;
+}
+#confirm:hover {
+   background-color: #2c303b;
+   color: white;
+}
+#reset {
+   background-color: black;
+   border: 1px solid black;
+   color: white;
+}
+.main {
    
-    <style>
-            body{
-                margin:0px;
-                padding:0px;
-                background-color:#FFFFFF;
-            }
-            .lastbar{
-                margin:0px;
-                overflow: hidden;
-                padding:0px;
-            }
+}
+</style>
 
-            .navi{
-                position:fixed;
-                top:0px;
-                margin:0px;
-                overflow: hidden;
-                padding:0px;
-                width:60%;
-                left: 20%;              
-                background-color: #FFFFFF90;
-                font-family:fantasy;
-                font-size: 20px;
-            }
-            .title{
-                margin:0px;
-                padding:0px;
-                width:50%;
-            }
-            .itemList{
-                position: absolute;
-                margin:0px;
-                padding:0px;
-                right: 0px;
-                width:50%;
-            }
-            .navi-title{
-                list-style-type: none;
-                width:50%;
-                line-height:72px;
-                float:left;
-                text-align: center;
-                color:black;
-            }
-            .navi-item{
-
-                list-style-type: none;
-                width:30%;
-                line-height:72px;
-                float:left;
-                text-align: center;
-                color:black;
-            }
-            .navi-item2{
-                list-style-type: none;
-                width:25%;
-                line-height:30px;
-                float:left;
-                text-align: center;
-                color:black;
-            }
-            .navi-item3{
-                list-style-type: none;
-                width:25%;
-                line-height:72px;
-                float:left;
-                text-align: center;
-                color:black;
-            }
-            .navi-item>a{
-                text-decoration: none;
-                color:black;
-                width:100%;
-                height:100%;
-                display: block;
-            }
-            .navi-item2>a{
-                text-decoration: none;
-                color:black;
-                width:100%;
-                height:100%;
-                display: block;
-            }
-            .navi-item3>a{
-                text-decoration: none;
-                color:black;
-                width:100%;
-                height:100%;
-                display: block;
-                font-weight: bold;
-            }
-            .navi-title>a{
-                text-decoration: none;
-                color:black;
-                width:100%;
-                height:100%;
-                display: block;
-            }
-            .navi-item>a:hover{
-                background-color: orange;
-
-            }
-            .container{
-                background-color: #ededed;
-                width:60%;
-                margin:auto;
-                margin-top:0px;
-            }
-            .onefloor{
-                border-bottom: 3px solid black;
-                border-top: 3px solid black;
-                border-radius: 3px;
-            }
-            .twofloor{
-                border-bottom: 3px solid black;
-                border-radius: 3px;
-
-            }
-            .threefloor{
-                border-bottom: 3px solid black;
-                border-radius: 3px;
-                height: 50px;
-            }
-
-            .fivefloor{
-                border-top: 3px solid black;
-                border-radius: 3px;
-                width: 100%;
-                background-color: gainsboro;
-            }
-            .progress{
-                display: inline-block;
-                width: 90%;
-                height: 10%;
-            }
-
-            .submenu{
-                font-family: 'Calistoga', cursive;
-                color:black;
-            }
-            .sidebar{
-                height: 51px;
-
-                font-family: 'Calistoga', cursive;
-
-                text-align: center;
-            }
-            .sidebar>a{
-                height: 100%;
-                color:#FFFFFF;
-            }
-            .fourthfloor{
-                height: 700px;
-            }
-            table{
-                border: 2px solid black;
-                margin: auto;
-                position: relative;
-                top: 120px;
-                height: 400px;
-                width: 500px;
-            }
-            th{
-                font-size: 30px;
-                text-align: center;
-            }
-            tr{
-                height: 25px;
-            }
-            #btnresult{
-                text-align: center;
-            }
-            .sub{
-                text-align: right;
-            }
-            #confirm{
-               background-color: black;
-               border: 1px solid black;
-               color: white;
-            }
-            #reset{
-               background-color: black;
-               border: 1px solid black;
-               color: white;
-            }
-        </style>
-   
 </head>
 <body>
-<%
-            String realuri = request.getHeader("Referer");
-            System.out.println("realuri : " + realuri);
-
-         %>
+   <div>
+      <img
+         src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg"
+         class="back"
+         style="position: fixed; z-index: -500; filter: blur(4px);">
+   </div>
    <div class="container">
-      <br>
-      <br>
-      <br>
+
+      <br> <br> <br>
       <div class="twofloor"></div>
 
       <div class="fourthfloor">
-      
+
          <form action="signup.mem" method="post" id="signfrm">
-            <table class="signuptable">
-               <tr>
-                  <th colspan="2">Welcome to Join
-               </tr>
-               <tr>
-                  <td class="sub">아이디</td>
-                  <td><input type="text" id="id" name="id">
-               </tr>
-               <tr>
-                  <td colspan="2" id="idresult"></td>
-               </tr>
-               <tr>
-                  <td class="sub">비밀번호</td>
-                  <td><input type="password" id="pw1" name="pw"></td>
-               </tr>
-               <tr>
-                  <td colspan="2" id="pw1result" style="text-align: center;">
-                     (비밀번호는 영어 대소문자, 숫자 조합 8자 이상)</td>
-               </tr>
-               <tr>
-                  <td class="sub">비밀번호 확인</td>
-                  <td><input type="password" id="pw2"></td>
-               </tr>
-               <tr>
-                  <td colspan="2" id="pw2result"></td>
-               </tr>
-               <tr>
-                  <td class="sub">이름</td>
-                  <td><input type="text" id="name" name="name"></td>
-               </tr>
-               <tr>
-                  <td colspan="2" id="nameresult"></td>
-               </tr>
-               <tr>
-                  <td class="sub">휴대폰번호</td>
-                  <td><input type="text" id="phone" placeholder="010-1234-5678" name="phone"></td>
-               </tr>
-               <tr>
-                  <td colspan="2" id="phoneresult"></td>
-               </tr>
-               <tr>
-                  <td class="sub">이메일</td>
-                  <td><input type="text" id="email"
-                     placeholder="abc123@def.com" name="email"></td>
-               </tr>
-               <tr>
-                  <td colspan="2" id=emailresult></td>
-               </tr>
-               <tr>
-                  <td colspan="2" id="btnresult">
-                  <button id="confirm" type="button">확인</button> <input type="reset" value="다시입력" id="reset"></td>
-               </tr>
-            </table>
+            <div class="main">
+
+               <!-- Sign up form -->
+               <section class="signup">
+                  <div class="container">
+                     <div class="signup-content">
+                        <div class="signup-form">
+                           <h2 class="form-title">Sign up</h2>
+                           <form method="POST" class="register-form" id="register-form">
+                              <div class="form-group">
+                                 <label for="re-pass" class="labelTag"><i
+                                    class="zmdi zmdi-lock-outline"></i></label> <input type="text"
+                                    name="id" id="id" placeholder="Your Id" />
+                                    <span id="idresult"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="pass" class="labelTag"><i
+                                    class="zmdi zmdi-lock"></i></label> <input type="password"
+                                    name="pw1" id="pw1" placeholder="Password" />
+                                    <span id="pw1result"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="re-pass" class="labelTag"><i
+                                    class="zmdi zmdi-lock-outline"></i></label> <input type="password"
+                                    name="pw" id="pw2"
+                                    placeholder="Repeat your password" />
+                                    <span id="pw2result"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="name" class="labelTag"><i
+                                    class="zmdi zmdi-account material-icons-name"></i></label> <input
+                                    type="text" name="name" id="name" placeholder="Your Name" />
+                                    <span id="nameresult"></span>
+                              </div>
+                              <div class="form-group">
+                                 <label for="re-pass" class="labelTag"><i
+                                    class="zmdi zmdi-lock-outline"></i></label> <input type="text"
+                                    name="phone" id="phone" placeholder="010-1234-5678" />
+                                    <span id="phoneresult"></span>
+                              </div>
+
+                              <div class="form-group">
+                                 <label for="email" class="labelTag"><i
+                                    class="zmdi zmdi-email"></i></label> <input type="email"
+                                    name="email" id="email" placeholder="abc123@def.com" />
+                                    <span id="emailresult"></span>
+                              </div>
+                              <!-- <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div> -->
+                              <div class="form-group form-button">
+                                 <input type="submit" name="confirm" id="confirm"
+                                    class="form-submit" value="Register" />
+                              </div>
+                           </form>
+                        </div>
+                        <div class="signup-image">
+                           <figure>
+                              <img src="${pageContext.request.contextPath }/user/login/colorlib-regform-7/images/signup-image.jpg" alt="sing up image">
+                           </figure>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </div>
          </form>
       </div>
       <div class="bottom"></div>
@@ -309,22 +356,19 @@
       </div>
       <br>
       <div class="lastbar3" style="text-align: center">
-         <a href="#"><img src="Img/icon1.png" class="mr-3" alt="..."
+         <a href="#"><img src="${pageContext.request.contextPath }/resources/img/icon1.png" class="mr-3" alt="..."
             style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-         <a href="#"><img src="Img/icon2.png" class="mr-3" alt="..."
+         <a href="#"><img src="${pageContext.request.contextPath }/resources/img/icon2.png" class="mr-3" alt="..."
             style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-         <a href="#"><img src="Img/icon3.png" class="mr-3" alt="..."
+         <a href="#"><img src="${pageContext.request.contextPath }/resources/img/icon3.png" class="mr-3" alt="..."
             style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
       </div>
       <br>
    </div>
-   <div class="category">
-      <div class="wrapper"></div>
-   </div>
    <ul class="navi">
       <ul class="title">
-         <li class="navi-title"><a href="#"><img src="Img/reallogo.png"
-               class="mr-3" alt="..."
+         <li class="navi-title"><a href="#"><img
+               src="Img/reallogo.png" class="mr-3" alt="..."
                style="width: 135px; height: 50px; margin-left: 10%;"></a></li>
       </ul>
       <ul class="itemList">
@@ -359,6 +403,18 @@
    <script>
    $("#id").on("focusout", function(){
       var id = $("#id").val();
+       var regex = /^[a-z0-9]{3,}$/;
+       var result = regex.exec(id);
+       if(result != null){
+           $("#idresult").html("✔");
+           $("#idresult").css("color","blue");
+           $("#idresult").css("text-align","center");
+       }else{
+           $("#idresult").html("❌");
+           $("#id").val("");
+           $("#idresult").css("color","red");
+           $("#idresult").css("text-align","center");
+       }
       $.ajax({
          url:"idcheck.mem",
          type:"post",
@@ -368,16 +424,19 @@
          dataType: "json"
       }).done(function(data){
          if(data.result == true){
-            $("#idresult").html("사용할 수 없는 아이디입니다.");
+            $("#idresult").html("❌");
             $("#id").val("");
-            $("#idresult").css("text-align","center");
-            $("#idresult").css("color","red");
-         }else{
-            $("#idresult").html("사용가능한 아이디입니다.");
-            $("#idresult").css("text-align","center");
-            $("#idresult").css("color","blue");
+            $("#id").css("text-align","center");
+            $("#id").css("color","red");
+            $("#id").val("이미 사용중인 아이디입니다");
          }
       })
+   })
+   $("#id").on("focus",function(){
+      $("#id").val("");
+       $("#id").css("text-align","left");
+       $("#id").css("color","black");
+       $("#idresult").html("");
    })
    
             $("#pw1").on("focusout", function(){
@@ -385,11 +444,11 @@
                 var data = $("#pw1").val();
                 var result = regex.exec(data);
                 if(result != null){
-                    $("#pw1result").html("비밀번호가 올바르게 입력되었습니다");
+                    $("#pw1result").html("✔");
                     $("#pw1result").css("color","blue");
                     $("#pw1result").css("text-align","center");
                 }else{
-                    $("#pw1result").html("비밀번호가 양식에 맞지 않습니다");
+                    $("#pw1result").html("❌");
                     $("#pw1").val("");
                     $("#pw1result").css("color","red");
                     $("#pw1result").css("text-align","center");
@@ -398,18 +457,16 @@
 
             $("#pw2").on("focusout", function(){
                 if($("#pw1").val() == ""){
-                    $("#pw1result").html("비밀번호를 입력하세요");
+                    $("#pw1result").html("❌");
                     $("#pw1result").css("color","red");
                     $("#pw1result").css("text-align","center");
                 }
                 if($("#pw1").val() == $("#pw2").val()){
-                    $("#pw2result").html("비밀번호가 일치합니다");
-                    $("#pw2result").css("color","blue");
+                    $("#pw2result").html("✔");
                     $("#pw2result").css("text-align","center");
                 }else{
-                    $("#pw2result").html("비밀번호가 일치하지 않습니다");
+                    $("#pw2result").html("❌");
                     $("#pw2").val("");
-                    $("#pw2result").css("color","red");
                     $("#pw2result").css("text-align","center");
                 }
             })
@@ -419,11 +476,11 @@
                 var data = $("#name").val();
                 var result = regex.exec(data);
                 if(result != null){
-                    $("#nameresult").html("이름이 올바르게 입력되었습니다");
+                    $("#nameresult").html("✔");
                     $("#nameresult").css("color","blue");
                     $("#nameresult").css("text-align","center");
                 }else{
-                    $("#nameresult").html("이름이 양식에 맞지 않습니다");
+                    $("#nameresult").html("❌");
                     $("#name").val("");
                     $("#nameresult").css("color","red");
                     $("#nameresult").css("text-align","center");
@@ -435,11 +492,11 @@
                 var data = $("#phone").val();
                 var result = regex.exec(data);
                 if(result != null){
-                    $("#phoneresult").html("휴대폰번호가 올바르게 입력되었습니다");
+                    $("#phoneresult").html("✔");
                     $("#phoneresult").css("color","blue");
                     $("#phoneresult").css("text-align","center");
                 }else{
-                    $("#phoneresult").html("휴대폰번호가 양식에 맞지 않습니다");
+                    $("#phoneresult").html("❌");
                     $("#phone").val("");
                     $("#phoneresult").css("color","red");
                     $("#phoneresult").css("text-align","center");
@@ -451,11 +508,11 @@
                 var data = $("#email").val();
                 var result = regex.exec(data);
                 if(result != null){
-                    $("#emailresult").html("이메일이 올바르게 입력되었습니다");
+                    $("#emailresult").html("✔");
                     $("#emailresult").css("color","blue");
                     $("#emailresult").css("text-align","center");
                 }else{
-                    $("#emailresult").html("이메일이 양식에 맞지 않습니다");
+                    $("#emailresult").html("❌");
                     $("#email").val("");
                     $("#emailresult").css("color","red");
                     $("#emailresult").css("text-align","center");
@@ -472,7 +529,7 @@
             })
                           
         </script>
-        <script>
+   <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

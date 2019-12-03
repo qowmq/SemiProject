@@ -17,8 +17,10 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.ChallengeDAO;
 import DAO.ChallengeRecordDAO;
+import DAO.MemberDAO;
 import DTO.ChallengeDTO;
 import DTO.Challenge_recordDTO;
+import DTO.MemberDTO;
 import adminboardCongiuration.Configuration;
 
 @WebServlet("*.adboard")
@@ -173,11 +175,14 @@ public class AdminBoardServlet extends HttpServlet {
 			String id = request.getParameter("id");
 
 			System.out.println("넘어온 아이디 값은 : " + id);
+			MemberDTO dto = new MemberDTO();
 			List<ChallengeDTO> list = new ArrayList<>();
 			try {
+				dto = MemberDAO.getInstance().select(id);
 				list = ChallengeRecordDAO.getInstance().detailChallengeList(id); //참여한 챌린지의 seq얻음
-
+				
 				request.setAttribute("list", list);
+				request.setAttribute("dto", dto);
 
 				request.getRequestDispatcher("/admin/detailmemberlist.jsp").forward(request, response);
 

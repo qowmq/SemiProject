@@ -125,7 +125,7 @@ Copyright ⓒ2019 Miwansung inc, ltd. All rights reserved</div><br>
             <ul class="itemList">
             
             <li class="navi-item"><a href="#"  style="font-family: 양진체; font-weight:bold;">ADMIN PAGE</a></li>
-            <li class="navi-item"><button id="logoutbtn" style="font-family: 양진체; font-weight:bold; border: none; background-color: white">LOGOUT</button></li>
+            <li class="navi-item"><button id="logoutbtn" style="font-family: 양진체; font-weight:bold; border: none;  background:none;">LOGOUT</button></li>
             </ul>
         </ul>
         <script>

@@ -110,18 +110,18 @@ public class UserBoardServlet extends HttpServlet {
 		} else if (realPath.contentEquals("/myPageDetailView.usboard")) {
 
 			System.out.println("여기로 넘어 왔나욤???ㅎㅎㅎ");
-			// int challengeNum = Integer.parseInt(request.getParameter("challengeSeq"));
+			 int challengeNum = Integer.parseInt(request.getParameter("challengeSeq"));
 			// int recordNum = Integer.parseInt(request.getParameter("recordSeq"));
 
 
 			String id = (String) request.getSession().getAttribute("id");
 			try {
 
-				int recordNum = ChallengeRecordDAO.getInstance().selectSeq(16, "sky");
+				int recordNum = ChallengeRecordDAO.getInstance().selectSeq(16, id);
 
 				// System.out.println(challengeNum + ":::::::::::::::" + recordNum);
 				System.out.println("레코드 넘버 !! ::: " + recordNum);
-				ChallengeDTO dto = ChallengeDAO.getInstance().getChallenge(16);
+				ChallengeDTO dto = ChallengeDAO.getInstance().getChallenge(challengeNum);
 
 				System.out.println(dto.getStart_date());
 				SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy-MM-dd");

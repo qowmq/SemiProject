@@ -17,6 +17,28 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
 	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap"
+	rel="stylesheet">
+<style>
+@font-face {
+	font-family: '양진체';
+	src:
+		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'BMEULJIRO';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+</style>
 <style>
 body {
 	margin: 0px;
@@ -38,7 +60,7 @@ body {
 	padding: 0px;
 	width: 60%;
 	left: 20%;
-	background-color: #FFFFFF90;
+	background-color: white;
 	font-family: fantasy;
 	font-size: 20px;
 }
@@ -53,7 +75,7 @@ body {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	right: 0px;
+	right: -250px;
 	width: 50%;
 }
 
@@ -63,12 +85,7 @@ body {
 	line-height: 72px;
 	float: left;
 	text-align: center;
-	color: #7019FF;
-}
-
-.navi-title>img {
-	width: 100%;
-	height: 100%;
+	color: #1D1F21;
 }
 
 .navi-item {
@@ -77,7 +94,7 @@ body {
 	line-height: 72px;
 	float: left;
 	text-align: center;
-	color: #7019FF;
+	color: #1D1F21;
 }
 
 .navi-item2 {
@@ -86,7 +103,7 @@ body {
 	line-height: 30px;
 	float: left;
 	text-align: center;
-	color: #7019FF;
+	color: #1D1F21;
 }
 
 .navi-item3 {
@@ -95,20 +112,21 @@ body {
 	line-height: 72px;
 	float: left;
 	text-align: center;
-	color: #7019FF;
+	color: #1D1F21;
 }
 
 .navi-item>a {
 	text-decoration: none;
-	color: #7019FF;
+	color: #1D1F21;
 	width: 100%;
 	height: 100%;
 	display: block;
+	padding-top: 4px;
 }
 
 .navi-item2>a {
 	text-decoration: none;
-	color: #7019FF;
+	color: #1D1F21;
 	width: 100%;
 	height: 100%;
 	display: block;
@@ -116,7 +134,7 @@ body {
 
 .navi-item3>a {
 	text-decoration: none;
-	color: #7019FF;
+	color: #1D1F21;
 	width: 100%;
 	height: 100%;
 	display: block;
@@ -125,48 +143,44 @@ body {
 
 .navi-title>a {
 	text-decoration: none;
-	color: #7019FF;
+	color: #1D1F21;
 	width: 100%;
 	height: 100%;
 	display: block;
 }
 
-.navi-item>a:hover {
-	background-color: orange;
-}
-
 .container {
-	background-color: #ededed;
+	background-color: white;
 	width: 60%;
 	margin: auto;
 	margin-top: 0px;
 }
 
 .onefloor {
-	border-bottom: 3px solid #7019FF;
-	border-top: 3px solid #7019FF;
+	border-bottom: 3px solid #1D1F21;;
+	border-top: 3px solid #1D1F21;
 	border-radius: 3px;
 }
 
 .twofloor {
-	border-top: 3px solid #7019FF;
-	border-bottom: 3px solid #7019FF;
+	border-top: 3px solid #1D1F21;
 	border-radius: 3px;
 	height: 40px;
 	font-size: 20px;
 }
 
 .threefloor {
-	border-bottom: 3px solid #7019FF;
+	border-bottom: 3px solid #1D1F21;
 	border-radius: 3px;
 	height: 50px;
+	font-size: 20px;
 }
 
 .fivefloor {
-	border-top: 3px solid #7019FF;
+	border-top: 3px solid #1D1F21;
 	border-radius: 3px;
 	width: 100%;
-	background-color: gainsboro;
+	background-color: white;
 }
 
 .progress {
@@ -181,7 +195,7 @@ body {
 	left: 5%;
 	width: 13%;
 	height: 150px;
-	border: 3px solid #7019FF;
+	background-color: white;
 }
 
 #enjoybtn {
@@ -219,10 +233,10 @@ body {
 }
 
 .fourthfloor {
-	height: 100%;
+	height: 500px;
 }
 
-.listboard {
+#listboard {
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	margin: auto;
@@ -245,16 +259,24 @@ th {
 </style>
 </head>
 <body>
+	<div>
+		<img
+			src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg"
+			class="back"
+			style="position: fixed; z-index: -500; filter: blur(4px);">
+	</div>
 	<div class="container">
 		<br> <br> <br>
-		<div class="twofloor">Manager Page</div>
-		<div class="threefloor">Member List</div>
+		<div class="twofloor"></div>
+		<div class="threefloor" style="font-family: 'Calistoga', cursive;">
+			Member List</div>
 
 		<div class="fourthfloor">
 			<br>
-			<table class="listboard">
+			<table id="listboard">
 				<tr>
-					<th colspan=2 id="title">회원목록
+					<th colspan=2 id="title"
+						style="font-family: 'BMEULJIRO'; font-weight: 50;">회원 정보
 				</tr>
 				<tr>
 					<th width="20%" style="text-align: center">회원ID
@@ -282,12 +304,10 @@ th {
 					<th width="80%" style="text-align: center">${dto.getout }
 				</tr>
 			</table>
-			<br>
-			<br>
+			<br> <br>
 
 			<h1 style="text-align: center">참여중인 챌린지</h1>
-			<br>
-			<br>
+			<br> <br>
 			<table class="listboard">
 				<c:choose>
 					<c:when test="${dto.size() == 0 }">
@@ -296,88 +316,143 @@ th {
 						</tr>
 					</c:when>
 					<c:otherwise>
+						<tr>
+							<ul class="list-group list-group-flush border-none">
+								<li class="list-group-item  border-gray">
+									<div class="row border-dark">
+										<div class="col text-center">챌린지 번호</div>
+										<div class="col text-center">챌린지명</div>
+										<div class="col text-center">카테고리</div>
+										<div class="col text-center">구분</div>
+										<div class="col text-center">포인트</div>
+										<div class="col text-center">상태</div>
+
+									</div>
+								</li>
+							</ul>
+						</tr>
 						<c:forEach items="${list}" var="dto">
 							<tr>
-								<th width="100%" style="text-align: center"><a
-									href="${pageContext.request.contextPath}/detail.adboard?seq=${dto.seq}">${dto.title}</a>
+							<ul class="list-group list-group-flush border-none">
+								<li class="list-group-item  border-gray">
+									<div class="row border-dark">
+										<div class="col text-center">${dto.seq}</div>
+										<div class="col text-center">${dto.title }</div>
+										<div class="col text-center">${dto.category }</div>
+										<div class="col text-center">${dto.giveortake}</div>
+										<div class="col text-center">${dto.pp_point }</div>
+										<div class="col text-center">${dto.end }</div>
+									</div>
+								</li>
+							</ul>
+						</tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 				</tr>
 			</table>
-			<br>
-			<br>
+			<br> <br>
 		</div>
 
-	</div>
 
-	<div class="fivefloor">
-		<ul class="lastbar">
-			<li class="navi-item3"><a href="#">COMPANY</a></li>
-			<li class="navi-item3"><a href="#">POLICIES</a></li>
-			<li class="navi-item3"><a href="#">SUPPORT</a></li>
-			<li class="navi-item3"><a href="#">기업교육</a></li>
-			<br>
-			<br>
-		</ul>
-		<ul class="lastbar">
-			<li class="navi-item2"><a href="#">블로그</a></li>
-			<li class="navi-item2"><a href="#">이용약관</a></li>
-			<li class="navi-item2"><a href="#">FAQ</a></li>
-			<li class="navi-item2"><a href="#">MIWANSUNG.BIZ</a></li>
 
-		</ul>
-		<ul class="lastbar">
-			<li class="navi-item2"><a href="#">언론보도</a></li>
-			<li class="navi-item2"><a href="#">개인정보취급방침</a></li>
-			<li class="navi-item2"><a href="#">미완성센터</a></li>
-			<li class="navi-item2"><a href="#"></a></li>
-			<br>
-			<br>
-		</ul>
-		<div class="lastbar2" style="text-align: center;">
-			상호 : (주)미완성자들 | 주소 : 서울특별시 종로구 평창동 486 -20 | 사업자등록번호 : 234-88-00720 |
-			대표자명 : 김세원<br> Copyright ⓒ2019 Miwansung inc, ltd. All rights
-			reserved
-		</div>
-		<br>
-		<div class="lastbar3" style="text-align: center">
-			<a href="#"><img src="Img/icon1.png" class="mr-3" alt="..."
-				style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-			<a href="#"><img src="Img/icon2.png" class="mr-3" alt="..."
-				style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-			<a href="#"><img src="Img/icon3.png" class="mr-3" alt="..."
-				style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-		</div>
-		<br>
-	</div>
-	<div class="wrapper">
-		<div class="category">
-			<ul style="list-style-type: none; padding: 0; text-align: center;">
-				<li><a
-					href="${pageContext.request.contextPath}/adminChallenge/adminMyPage.jsp"
-					style="color: black; font-weight: bold">Manager Home</a> <br>
-					<br>
-				<li><a href="memberlist.mem" style="color: black">Member
-						List</a>
-				<li><a href="list.adboard" style="color: black;">Board List</a>
-				<li><a href="list.adboard" style="color: black;">write
-						Board</a>
+		<div class="fivefloor">
+			<ul class="lastbar">
+				<li class="navi-item3"><a href="#">COMPANY</a></li>
+				<li class="navi-item3"><a href="#">POLICIES</a></li>
+				<li class="navi-item3"><a href="#">SUPPORT</a></li>
+				<li class="navi-item3"><a href="#">기업교육</a></li>
+				<br>
+				<br>
 			</ul>
+			<ul class="lastbar">
+				<li class="navi-item2"><a href="#">블로그</a></li>
+				<li class="navi-item2"><a href="#">이용약관</a></li>
+				<li class="navi-item2"><a href="#">FAQ</a></li>
+				<li class="navi-item2"><a href="#">MIWANSUNG.BIZ</a></li>
+
+			</ul>
+			<ul class="lastbar">
+				<li class="navi-item2"><a href="#">언론보도</a></li>
+				<li class="navi-item2"><a href="#">개인정보취급방침</a></li>
+				<li class="navi-item2"><a href="#">미완성센터</a></li>
+				<li class="navi-item2"><a href="#"></a></li>
+				<br>
+				<br>
+			</ul>
+			<div class="lastbar2" style="text-align: center;">
+				상호 : (주)미완성자들 | 주소 : 서울특별시 종로구 평창동 486 -20 | 사업자등록번호 : 234-88-00720
+				| 대표자명 : 김세원<br> Copyright ⓒ2019 Miwansung inc, ltd. All rights
+				reserved
+			</div>
+			<br>
+			<div class="lastbar3" style="text-align: center">
+				<a href="#"><img
+					src="${pageContext.request.contextPath }/resources/img/icon1.png"
+					class="mr-3" alt="..."
+					style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
+				<a href="#"><img
+					src="${pageContext.request.contextPath }/resources/img/icon2.png"
+					class="mr-3" alt="..."
+					style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
+				<a href="#"><img
+					src="${pageContext.request.contextPath }/resources/img/icon3.png"
+					class="mr-3" alt="..."
+					style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
+			</div>
+			<br>
 		</div>
 	</div>
+	<div class="category">
+		<div class="wrapper"
+			style="background-color: white; border: 3px solid black;">
+			<br>
+			<div class="sidebar">
+				<img
+					src="https://cdns.iconmonstr.com/wp-content/assets/preview/2018/240/iconmonstr-marketing-29.png"
+					style="widht: 30px; height: 30px;">
+			</div>
+			<div class="sidebar">
+				<a href="#"
+					style="font-family: 양진체; color: black; font-weight: bold;">Member
+					List</a>
+			</div>
+			<div class="sidebar">
+				<img
+					src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2018/png/iconmonstr-task-thin.png&r=0&g=0&b=0"
+					style="widht: 30px; height: 30px;">
+
+			</div>
+			<div class="sidebar">
+				<a href="../list.adboard"
+					style="font-family: 양진체; color: black; font-weight: bold; color: black">Board
+					List</a>
+			</div>
+			<div class="sidebar">
+				<img
+					src="https://cdns.iconmonstr.com/wp-content/assets/preview/2018/240/iconmonstr-pencil-thin.png"
+					style="widht: 30px; height: 30px;">
+			</div>
+			<div class="sidebar">
+				<a href="writeBoard.jsp"
+					style="font-family: 양진체; font-weight: bold; color: black;">write
+					Board</a>
+			</div>
+		</div>
 	</div>
-	<ul class="navi">
+
+	<ul class="navi" style="position: absolute">
 		<ul class="title">
-			<li class="navi-title"><a href=""> <!-- <img src="" class="mr-3" alt="..." style="width: 135px; height: 50px; margin-left: 10%;"> -->
-					DON'T GIVE UP
-			</a></li>
+			<li class="navi-title"><a href="${uri }"
+				style="font-family: 'Rock Salt', cursive; font-size: 20px;">
+					Don't Give Up </a></li>
 		</ul>
 		<ul class="itemList">
 
-			<li class="navi-item"><a href="#">GIVE OR TAKE</a></li>
-			<li class="navi-item"><a href="#">CHALLENGE</a></li>
-			<li class="navi-item"><a href="#">MYPAGE</a></li>
+			<li class="navi-item"><a href="adminMyPage.jsp"
+				style="font-family: 양진체; font-weight: bold;">ADMIN PAGE</a></li>
+			<li class="navi-item"><button id="logoutbtn"
+					style="font-family: 양진체; font-weight: bold; border: none; background-color: white">LOGOUT</button></li>
 		</ul>
 	</ul>
 	<script
@@ -388,31 +463,21 @@ th {
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-	<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var chart = new Chart(ctx, {
-			// The type of chart we want to create
-			type : 'line',
 
-			// The data for our dataset
-			data : {
-				labels : [ 'January', 'February', 'March', 'April', 'May',
-						'June', 'July' ],
-				datasets : [ {
-					label : 'My First dataset',
-					backgroundColor : 'rgb(255, 99, 132)',
-					borderColor : 'rgb(255, 99, 132)',
-					data : [ 0, 10, 5, 2, 20, 30, 45 ]
-				} ]
-			},
-
-			// Configuration options go here
-			options : {}
-		});
-	</script>
 	<script>
 		$("#searchbtn").on("click", function() {
 			$("#searchfrm").submit();
+		})
+
+		$("#back").on("click", function() {
+			location.href = "adminMyPage.jsp";
+		})
+
+		$("#logoutbtn").on("click", function() {
+			var result = confirm("로그아웃 하시겠습니까?");
+			if (result) {
+				location.href = "logout.mem";
+			}
 		})
 	</script>
 </body>
