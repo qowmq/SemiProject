@@ -344,11 +344,11 @@
 			</div>
 			<br>
 			<div class="lastbar3" style="text-align: center">
-				<a href="#"><img src="../Img/icon1.png" class="mr-3" alt="..."
+				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/icon1.png" class="mr-3" alt="..."
 					style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-				<a href="#"><img src="../Img/icon2.png" class="mr-3" alt="..."
+				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/icon2.png" class="mr-3" alt="..."
 					style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-				<a href="#"><img src="../Img/icon3.png" class="mr-3" alt="..."
+				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/icon3.png" class="mr-3" alt="..."
 					style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
 			</div>
 			<br>

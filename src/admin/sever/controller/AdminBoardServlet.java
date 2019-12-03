@@ -171,13 +171,12 @@ public class AdminBoardServlet extends HttpServlet {
 		}else if (realPath.contentEquals("/memberlist.adboard")) {
 
 			String id = request.getParameter("id");
-			//int seq = Integer.parseInt(request.getParameter("seq"));
 
 			System.out.println("넘어온 아이디 값은 : " + id);
 			Challenge_recordDTO recoardDTO = new Challenge_recordDTO();
 			ChallengeDTO challengeDTO = new ChallengeDTO();
 			try {
-				//recoardDTO = ChallengeRecordDAO.getInstance().detailChallenge(id, seq); //참여한 챌린지의 seq얻음
+				recoardDTO = ChallengeRecordDAO.getInstance().detailChallenge(id); //참여한 챌린지의 seq얻음
 
 				request.setAttribute("recoardDTO", recoardDTO);
 

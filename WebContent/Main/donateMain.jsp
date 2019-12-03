@@ -135,70 +135,73 @@
 </script>
 
 <style>
-	#mypage{
-		border: 1px solid black;
-		background-color: black;
-		color: white;
-		width: 100px;
-		height: 30px;
-		font-size: 15px;
-		border-radius: 10px;
-	}
-	#logout{
-		border: 1px solid black;
-		background-color: black;
-		color: white;
-		width: 100px;
-		height: 30px;
-		font-size: 15px;
-		border-radius: 10px;
-	}
-	#adminpage{
-		border: 1px solid black;
-		background-color: black;
-		color: white;
-		width: 100px;
-		height: 30px;
-		font-size: 15px;
-		border-radius: 10px;
-	}
-	#adminlogout{
-		border: 1px solid black;
-		background-color: black;
-		color: white;
-		width: 100px;
-		height: 30px;
-		font-size: 15px;
-		border-radius: 10px;
-	}
+#mypage {
+	border: 1px solid black;
+	background-color: black;
+	color: white;
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+#logout {
+	border: 1px solid black;
+	background-color: black;
+	color: white;
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+#adminpage {
+	border: 1px solid black;
+	background-color: black;
+	color: white;
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+#adminlogout {
+	border: 1px solid black;
+	background-color: black;
+	color: white;
+	width: 100px;
+	height: 30px;
+	font-size: 15px;
+	border-radius: 10px;
+}
 </style>
 </head>
 
 <body>
 	<div class="wrap">
 		<div class="header">
-		<img class="headerbackground" src="${pageContext.request.contextPath }/resources/img/MainBackground.gif">
+			<img class="headerbackground"
+				src="${pageContext.request.contextPath }/resources/img/MainBackground.gif">
 			<div class="navi">
 				<div class="naviBox">
 					<span class="logoText" style="font-family: 'Rock Salt', cursive;">Don't
 						Give Up</span> <span class="flex challengeLogo">기부</span> <span
 						class="flex naviCategory"><a href="#" class="takeBtn">테이크</a>
-						<c:choose>
-							<c:when test="${loginResult2 == null }">
-								<a
-									href="${pageContext.request.contextPath }/user/login/login.jsp"
-									class="login">로그인</a>
-								<a
-									href="${pageContext.request.contextPath }/user/login/signup.jsp"
-									class="signUp">회원가입</a></span>
-					</c:when>
-					<c:otherwise>
-						
+					<c:choose>
+						<c:when test="${loginResult2 == null }">
+							<a
+								href="${pageContext.request.contextPath }/user/login/login.jsp"
+								class="login">로그인</a>
+							<a
+								href="${pageContext.request.contextPath }/user/login/signup.jsp"
+								class="signUp">회원가입</a></span>
+						</c:when>
+						<c:otherwise>
                   			${id }님
-                     <button id="mypage">마이페이지</button>
-								<button id="logout">로그아웃</button>
-							</c:otherwise>
-						
+                    	 	<button id="mypage">마이페이지</button>
+							<button id="logout">로그아웃</button>
+						</c:otherwise>
+
 					</c:choose>
 				</div>
 			</div>
@@ -243,7 +246,8 @@
 				<div class="challengeMainBox">
 					<div class="challengeOne">
 						<div class="challengeOne-div">
-							<img src="${pageContext.request.contextPath }/Img/exercise.png"
+							<img
+								src="${pageContext.request.contextPath}/files/${list.get(0).file_path}"
 								class="challengeOneImg">
 						</div>
 						<div class="challengeOne-explan">${list.get(0).title}</div>
@@ -254,7 +258,7 @@
 						<div class="challengeTwo challengeTwo-1">
 							<div class="challengeTwo-div">
 								<img
-									src="${pageContext.request.contextPath }/resources/img/exercise.png"
+									src="${pageContext.request.contextPath}/files/${list.get(1).file_path}"
 									class="challengeSubImg">
 							</div>
 							<div class="challengeTwo-explan">${list.get(1).title }</div>
@@ -263,7 +267,7 @@
 						<div class="challengeTwo challengeTwo-2">
 							<div class="challengeTwo-div">
 								<img
-									src="${pageContext.request.contextPath }/resources/img/exercise.png"
+									src="${pageContext.request.contextPath}/files/${list.get(2).file_path}"
 									class="challengeSubImg">
 							</div>
 							<div class="challengeTwo-explan">${list.get(2).title}</div>
@@ -272,7 +276,7 @@
 						<div class="challengeTwo challengeTwo-3">
 							<div class="challengeTwo-div">
 								<img
-									src="${pageContext.request.contextPath }/resources/img/exercise.png"
+									src="${pageContext.request.contextPath}/files/${list.get(3).file_path}"
 									class="challengeSubImg">
 							</div>
 							<div class="challengeTwo-explan">${list.get(3).title}</a>
@@ -287,7 +291,9 @@
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv" onclick="clickFun(${lifelist.get(i).seq})">
 								<input type="hidden" class="seq" value="${lifelist.get(i).seq}">
-								<img src="b.png" class="slideImg">
+								<img
+									src="${pageContext.request.contextPath}/files/${lifelist.get(i).file_path}"
+									class="slideImg">
 								<h3 class="slideTitle">${lifelist.get(i).title}</h3>
 								<h5 class="slideExplan">${lifelist.get(i).content}</h5>
 							</div>
@@ -299,28 +305,34 @@
 					<div class="slideShow" align="center" style="width: 1200px;">
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv" onclick="clickFun(${studylist.get(i).seq})">
-								<img src="b.png" class="slideImg">
+								<img
+									src="${pageContext.request.contextPath}/files/${studylist.get(i).file_path}"
+									class="slideImg">
 								<h3 class="slideTitle">${studylist.get(i).title}</h3>
 								<h5 class="slideExplan">${studylist.get(i).content}</h5>
 							</div>
-				</c:forEach>
+						</c:forEach>
 					</div>
 					<div class="recruitment" id="health">건강</div>
 					<div class="slideShow" align="center" style="width: 1200px;">
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv"
 								onclick="clickFun(${healthlist.get(i).seq})">
-								<img src="b.png" class="slideImg">
+								<img
+									src="${pageContext.request.contextPath}/files/${healthlist.get(i).file_path}"
+									class="slideImg">
 								<h3 class="slideTitle">${healthlist.get(i).title}</h3>
 								<h5 class="slideExplan">${healthlist.get(i).content}</h5>
 							</div>
-				</c:forEach>
+						</c:forEach>
 					</div>
 					<div class="recruitment" id="exercise">운동</div>
 					<div class="slideShow" align="center" style="width: 1200px;">
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv" onclick="clickFun(${exlist.get(i).seq})">
-								<img src="b.png" class="slideImg">
+								<img
+									src="${pageContext.request.contextPath}/files/${exlist.get(i).file_path}"
+									class="slideImg">
 								<h3 class="slideTitle">${exlist.get(i).title}</h3>
 								<h5 class="slideExplan">${exlist.get(i).content}</h5>
 							</div>
@@ -360,11 +372,17 @@
 				</div>
 				<br>
 				<div class="lastbar3" style="text-align: center">
-					<a href="#"><img src="../Img/icon1.png" class="mr-3" alt="..."
+					<a href="#"><img
+						src="${pageContext.request.contextPath}/resources/img/icon1.png"
+						class="mr-3" alt="..."
 						style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-					<a href="#"><img src="../Img/icon2.png" class="mr-3" alt="..."
+					<a href="#"><img
+						src="${pageContext.request.contextPath}/resources/img/icon2.png"
+						class="mr-3" alt="..."
 						style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-					<a href="#"><img src="../Img/icon3.png" class="mr-3" alt="..."
+					<a href="#"><img
+						src="${pageContext.request.contextPath}/resources/img/icon3.png"
+						class="mr-3" alt="..."
 						style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
 				</div>
 				<br>
