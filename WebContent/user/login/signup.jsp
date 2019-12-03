@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -7,18 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+   crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <link
-	href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
-	rel="stylesheet">
-	
-	 <style>
+   href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
+   rel="stylesheet">
+   
+    <style>
             body{
                 margin:0px;
                 padding:0px;
@@ -194,143 +194,148 @@
                 text-align: right;
             }
             #confirm{
-            	background-color: black;
-            	border: 1px solid black;
-            	color: white;
+               background-color: black;
+               border: 1px solid black;
+               color: white;
             }
             #reset{
-            	background-color: black;
-            	border: 1px solid black;
-            	color: white;
+               background-color: black;
+               border: 1px solid black;
+               color: white;
             }
         </style>
-	
+   
 </head>
 <body>
-	<div class="container">
-		<br>
-		<br>
-		<br>
-		<div class="twofloor"></div>
+<%
+            String realuri = request.getHeader("Referer");
+            System.out.println("realuri : " + realuri);
 
-		<div class="fourthfloor">
-		
-			<form action="signup.mem" method="post" id="signfrm">
-				<table class="signuptable">
-					<tr>
-						<th colspan="2">Welcome to Join
-					</tr>
-					<tr>
-						<td class="sub">아이디</td>
-						<td><input type="text" id="id" name="id">
-					</tr>
-					<tr>
-						<td colspan="2" id="idresult"></td>
-					</tr>
-					<tr>
-						<td class="sub">비밀번호</td>
-						<td><input type="password" id="pw1" name="pw"></td>
-					</tr>
-					<tr>
-						<td colspan="2" id="pw1result" style="text-align: center;">
-							(비밀번호는 영어 대소문자, 숫자 조합 8자 이상)</td>
-					</tr>
-					<tr>
-						<td class="sub">비밀번호 확인</td>
-						<td><input type="password" id="pw2"></td>
-					</tr>
-					<tr>
-						<td colspan="2" id="pw2result"></td>
-					</tr>
-					<tr>
-						<td class="sub">이름</td>
-						<td><input type="text" id="name" name="name"></td>
-					</tr>
-					<tr>
-						<td colspan="2" id="nameresult"></td>
-					</tr>
-					<tr>
-						<td class="sub">휴대폰번호</td>
-						<td><input type="text" id="phone" placeholder="010-1234-5678" name="phone"></td>
-					</tr>
-					<tr>
-						<td colspan="2" id="phoneresult"></td>
-					</tr>
-					<tr>
-						<td class="sub">이메일</td>
-						<td><input type="text" id="email"
-							placeholder="abc123@def.com" name="email"></td>
-					</tr>
-					<tr>
-						<td colspan="2" id=emailresult></td>
-					</tr>
-					<tr>
-						<td colspan="2" id="btnresult">
-						<button id="confirm" type="button">확인</button> <input type="reset" value="다시입력" id="reset"></td>
-					</tr>
-				</table>
-			</form>
-		</div>
-		<div class="bottom"></div>
-	</div>
-	<div class="fivefloor">
-		<ul class="lastbar">
-			<li class="navi-item3"><a href="#">COMPANY</a></li>
-			<li class="navi-item3"><a href="#">POLICIES</a></li>
-			<li class="navi-item3"><a href="#">SUPPORT</a></li>
-			<li class="navi-item3"><a href="#">기업교육</a></li>
-			<br>
-			<br>
-		</ul>
-		<ul class="lastbar">
-			<li class="navi-item2"><a href="#">블로그</a></li>
-			<li class="navi-item2"><a href="#">이용약관</a></li>
-			<li class="navi-item2"><a href="#">FAQ</a></li>
-			<li class="navi-item2"><a href="#">MIWANSUNG.BIZ</a></li>
+         %>
+   <div class="container">
+      <br>
+      <br>
+      <br>
+      <div class="twofloor"></div>
 
-		</ul>
-		<ul class="lastbar">
-			<li class="navi-item2"><a href="#">언론보도</a></li>
-			<li class="navi-item2"><a href="#">개인정보취급방침</a></li>
-			<li class="navi-item2"><a href="#">미완성센터</a></li>
-			<li class="navi-item2"><a href="#"></a></li>
-			<br>
-			<br>
-		</ul>
-		<div class="lastbar2" style="text-align: center;">
-			상호 : (주)미완성자들 | 주소 : 서울특별시 종로구 평창동 486 -20 | 사업자등록번호 : 234-88-00720 |
-			대표자명 : 김세원<br> Copyright ⓒ2019 Miwansung inc, ltd. All rights
-			reserved
-		</div>
-		<br>
-		<div class="lastbar3" style="text-align: center">
-			<a href="#"><img src="Img/icon1.png" class="mr-3" alt="..."
-				style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-			<a href="#"><img src="Img/icon2.png" class="mr-3" alt="..."
-				style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-			<a href="#"><img src="Img/icon3.png" class="mr-3" alt="..."
-				style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
-		</div>
-		<br>
-	</div>
-	<div class="category">
-		<div class="wrapper"></div>
-	</div>
-	<ul class="navi">
-		<ul class="title">
-			<li class="navi-title"><a href="#"><img src="Img/reallogo.png"
-					class="mr-3" alt="..."
-					style="width: 135px; height: 50px; margin-left: 10%;"></a></li>
-		</ul>
-		<ul class="itemList">
+      <div class="fourthfloor">
+      
+         <form action="signup.mem" method="post" id="signfrm">
+            <table class="signuptable">
+               <tr>
+                  <th colspan="2">Welcome to Join
+               </tr>
+               <tr>
+                  <td class="sub">아이디</td>
+                  <td><input type="text" id="id" name="id">
+               </tr>
+               <tr>
+                  <td colspan="2" id="idresult"></td>
+               </tr>
+               <tr>
+                  <td class="sub">비밀번호</td>
+                  <td><input type="password" id="pw1" name="pw"></td>
+               </tr>
+               <tr>
+                  <td colspan="2" id="pw1result" style="text-align: center;">
+                     (비밀번호는 영어 대소문자, 숫자 조합 8자 이상)</td>
+               </tr>
+               <tr>
+                  <td class="sub">비밀번호 확인</td>
+                  <td><input type="password" id="pw2"></td>
+               </tr>
+               <tr>
+                  <td colspan="2" id="pw2result"></td>
+               </tr>
+               <tr>
+                  <td class="sub">이름</td>
+                  <td><input type="text" id="name" name="name"></td>
+               </tr>
+               <tr>
+                  <td colspan="2" id="nameresult"></td>
+               </tr>
+               <tr>
+                  <td class="sub">휴대폰번호</td>
+                  <td><input type="text" id="phone" placeholder="010-1234-5678" name="phone"></td>
+               </tr>
+               <tr>
+                  <td colspan="2" id="phoneresult"></td>
+               </tr>
+               <tr>
+                  <td class="sub">이메일</td>
+                  <td><input type="text" id="email"
+                     placeholder="abc123@def.com" name="email"></td>
+               </tr>
+               <tr>
+                  <td colspan="2" id=emailresult></td>
+               </tr>
+               <tr>
+                  <td colspan="2" id="btnresult">
+                  <button id="confirm" type="button">확인</button> <input type="reset" value="다시입력" id="reset"></td>
+               </tr>
+            </table>
+         </form>
+      </div>
+      <div class="bottom"></div>
+   </div>
+   <div class="fivefloor">
+      <ul class="lastbar">
+         <li class="navi-item3"><a href="#">COMPANY</a></li>
+         <li class="navi-item3"><a href="#">POLICIES</a></li>
+         <li class="navi-item3"><a href="#">SUPPORT</a></li>
+         <li class="navi-item3"><a href="#">기업교육</a></li>
+         <br>
+         <br>
+      </ul>
+      <ul class="lastbar">
+         <li class="navi-item2"><a href="#">블로그</a></li>
+         <li class="navi-item2"><a href="#">이용약관</a></li>
+         <li class="navi-item2"><a href="#">FAQ</a></li>
+         <li class="navi-item2"><a href="#">MIWANSUNG.BIZ</a></li>
 
-			<li class="navi-item"><a href="#">GIVE OR TAKE</a></li>
-			<li class="navi-item"><a href="#">CHALLENGE</a></li>
-			<li class="navi-item"><a href="#">MYPAGE</a></li>
-		</ul>
-	</ul>
+      </ul>
+      <ul class="lastbar">
+         <li class="navi-item2"><a href="#">언론보도</a></li>
+         <li class="navi-item2"><a href="#">개인정보취급방침</a></li>
+         <li class="navi-item2"><a href="#">미완성센터</a></li>
+         <li class="navi-item2"><a href="#"></a></li>
+         <br>
+         <br>
+      </ul>
+      <div class="lastbar2" style="text-align: center;">
+         상호 : (주)미완성자들 | 주소 : 서울특별시 종로구 평창동 486 -20 | 사업자등록번호 : 234-88-00720 |
+         대표자명 : 김세원<br> Copyright ⓒ2019 Miwansung inc, ltd. All rights
+         reserved
+      </div>
+      <br>
+      <div class="lastbar3" style="text-align: center">
+         <a href="#"><img src="Img/icon1.png" class="mr-3" alt="..."
+            style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
+         <a href="#"><img src="Img/icon2.png" class="mr-3" alt="..."
+            style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
+         <a href="#"><img src="Img/icon3.png" class="mr-3" alt="..."
+            style="width: 50px; height: 50px; margin-left: 10%; margin: 0px;"></a>
+      </div>
+      <br>
+   </div>
+   <div class="category">
+      <div class="wrapper"></div>
+   </div>
+   <ul class="navi">
+      <ul class="title">
+         <li class="navi-title"><a href="#"><img src="Img/reallogo.png"
+               class="mr-3" alt="..."
+               style="width: 135px; height: 50px; margin-left: 10%;"></a></li>
+      </ul>
+      <ul class="itemList">
 
-	<script>
+         <li class="navi-item"><a href="#">GIVE OR TAKE</a></li>
+         <li class="navi-item"><a href="#">CHALLENGE</a></li>
+         <li class="navi-item"><a href="#">MYPAGE</a></li>
+      </ul>
+   </ul>
+
+   <script>
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
                 // The type of chart we want to create
@@ -351,29 +356,30 @@
                 options: {}
             });
         </script>
-	<script>
-	$("#id").on("focusout", function(){
-		var id = $("#id").val();
-		$.ajax({
-			url:"idcheck.mem",
-			type:"post",
-			data:{
-				id : id
-			},
-			dataType: "json"
-		}).done(function(data){
-			if(data.result == true){
-				$("#idresult").html("사용할 수 없는 아이디입니다.");
-				$("#idresult").css("text-align","center");
-				$("#idresult").css("color","red");
-			}else{
-				$("#idresult").html("사용가능한 아이디입니다.");
-				$("#idresult").css("text-align","center");
-				$("#idresult").css("color","blue");
-			}
-		})
-	})
-	
+   <script>
+   $("#id").on("focusout", function(){
+      var id = $("#id").val();
+      $.ajax({
+         url:"idcheck.mem",
+         type:"post",
+         data:{
+            id : id
+         },
+         dataType: "json"
+      }).done(function(data){
+         if(data.result == true){
+            $("#idresult").html("사용할 수 없는 아이디입니다.");
+            $("#id").val("");
+            $("#idresult").css("text-align","center");
+            $("#idresult").css("color","red");
+         }else{
+            $("#idresult").html("사용가능한 아이디입니다.");
+            $("#idresult").css("text-align","center");
+            $("#idresult").css("color","blue");
+         }
+      })
+   })
+   
             $("#pw1").on("focusout", function(){
                 var regex = /^[a-z0-9]{8,}$/;
                 var data = $("#pw1").val();
@@ -384,6 +390,7 @@
                     $("#pw1result").css("text-align","center");
                 }else{
                     $("#pw1result").html("비밀번호가 양식에 맞지 않습니다");
+                    $("#pw1").val("");
                     $("#pw1result").css("color","red");
                     $("#pw1result").css("text-align","center");
                 }
@@ -401,6 +408,7 @@
                     $("#pw2result").css("text-align","center");
                 }else{
                     $("#pw2result").html("비밀번호가 일치하지 않습니다");
+                    $("#pw2").val("");
                     $("#pw2result").css("color","red");
                     $("#pw2result").css("text-align","center");
                 }
@@ -416,6 +424,7 @@
                     $("#nameresult").css("text-align","center");
                 }else{
                     $("#nameresult").html("이름이 양식에 맞지 않습니다");
+                    $("#name").val("");
                     $("#nameresult").css("color","red");
                     $("#nameresult").css("text-align","center");
                 }
@@ -431,6 +440,7 @@
                     $("#phoneresult").css("text-align","center");
                 }else{
                     $("#phoneresult").html("휴대폰번호가 양식에 맞지 않습니다");
+                    $("#phone").val("");
                     $("#phoneresult").css("color","red");
                     $("#phoneresult").css("text-align","center");
                 }
@@ -446,19 +456,21 @@
                     $("#emailresult").css("text-align","center");
                 }else{
                     $("#emailresult").html("이메일이 양식에 맞지 않습니다");
+                    $("#email").val("");
                     $("#emailresult").css("color","red");
                     $("#emailresult").css("text-align","center");
                 }
             })
             
             $("#confirm").on("click",function(){
-               if($("#idresult").html("없는") || $("#pw1result").html("않습니다") || $("#pw2result").html("않습니다") || $("#nameresult").html("않습니다") ||
-                     $("#phoneresult").html("않습니다") || $("#emailresult").html("않습니다")){
-                  alert("망나니야..;;;;;");
+               if($("#id").val() == "" || $("#pw1").val() == "" || $("#pw2").val() == "" || $("#name").val() == "" || $("#phone").val() == "" ||
+                     $("#email").val() == ""){
+                  alert("양식을 확인해주세요");
                }else{
                   $("#signfrm").submit();
                }
             })
+                          
         </script>
         <script>
     function sample6_execDaumPostcode() {
@@ -491,7 +503,6 @@
 
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
-
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();

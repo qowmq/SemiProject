@@ -126,7 +126,7 @@ public class ChallengeDAO {
 	}
 
 	public ArrayList<ChallengeDTO> selectAll(String giveortake) throws Exception {
-		String sql = "select * from challenge where giveortake=?";
+		String sql = "select * from challenge where giveortake=? order by seq desc";
 		try (Connection conn = getConnection(); PreparedStatement pstat = conn.prepareStatement(sql);) {
 			pstat.setString(1, giveortake);
 			try (ResultSet rs = pstat.executeQuery()) {
@@ -190,7 +190,7 @@ public class ChallengeDAO {
 
 	public ArrayList<ChallengeDTO> getCatergoryChallege(String giveortake, String category)
 			throws SQLException, Exception {
-		String sql = "select * from challenge where giveortake=? and category =?";
+		String sql = "select * from challenge where giveortake=? and category =? order by seq desc";
 		try (Connection conn = getConnection(); PreparedStatement pstat = conn.prepareStatement(sql);) {
 			pstat.setString(1, giveortake);
 			pstat.setString(2, category);

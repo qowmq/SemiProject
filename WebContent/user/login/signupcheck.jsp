@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		alert("환영합니다!");
-		location.href="${uri }"
+   <script>
+      alert("환영합니다!");
+      location.href="${uri }"
 
-	</script>
+   </script>
 </body>
 </html>

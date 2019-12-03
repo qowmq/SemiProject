@@ -198,25 +198,25 @@
 			<div class="mainCategory">
 				<div id="exerciseCategory">
 					<img
-						src="${pageContext.request.contextPath }/resources/img/gym.png"
+						src="${pageContext.request.contextPath}/resources/img/gym.png"
 						class="categoryImg firstCategoryImg">
 					<div class="categoryTitle firstCategoryTitle">운동</div>
 				</div>
 				<div id="habitCategory">
 					<img
-						src="${pageContext.request.contextPath }/resources/img/healthy.png"
+						src="${pageContext.request.contextPath}/resources/img/healthy.png"
 						class="categoryImg secondCategoryImg">
 					<div class="categoryTitle secondCategoryTitle">생활</div>
 				</div>
 				<div id="studyCategory">
 					<img
-						src="${pageContext.request.contextPath }/resources/img/creativity.png"
+						src="${pageContext.request.contextPath}/resources/img/creativity.png"
 						class="categoryImg thirdCategoryImg">
 					<div class="categoryTitle thirdCategoryTitle">공부</div>
 				</div>
 				<div id="healthCategory">
 					<img
-						src="${pageContext.request.contextPath }/resources/img/care.png"
+						src="${pageContext.request.contextPath}/resources/img/care.png"
 						class="categoryImg fourthCategoryImg">
 					<div class="categoryTitle fourthCategoryTitle">건강</div>
 				</div>
@@ -227,7 +227,7 @@
 					<div class="challengeOne">
 						<div class="challengeOne-div">
 							<img
-								src="${pageContext.request.contextPath }/resources/img/exercise.png"
+								src="${pageContext.request.contextPath}/files/${list.get(0).file_path}"
 								class="challengeOneImg">
 						</div>
 						<div class="challengeOne-explan">${list.get(0).title}</div>
@@ -237,7 +237,7 @@
 						<div class="challengeTwo challengeTwo-1">
 							<div class="challengeTwo-div">
 								<img
-									src="${pageContext.request.contextPath }/resources/img/exercise.png"
+									src="${pageContext.request.contextPath}/files/${list.get(1).file_path}"
 									class="challengeSubImg">
 							</div>
 							<div class="challengeTwo-explan">${list.get(1).title}</div>
@@ -246,7 +246,7 @@
 						<div class="challengeTwo challengeTwo-2">
 							<div class="challengeTwo-div">
 								<img
-									src="${pageContext.request.contextPath }/resources/img/exercise.png"
+									src="${pageContext.request.contextPath}/files/${list.get(2).file_path}"
 									class="challengeSubImg">
 							</div>
 							<div class="challengeTwo-explan">${list.get(2).title}</div>
@@ -255,7 +255,7 @@
 						<div class="challengeTwo challengeTwo-3">
 							<div class="challengeTwo-div">
 								<img
-									src="${pageContext.request.contextPath }/resources/img/exercise.png"
+									src="${pageContext.request.contextPath}/files/${list.get(3).file_path}"
 									class="challengeSubImg">
 							</div>
 							<div class="challengeTwo-explan">${list.get(3).title}</div>
@@ -269,7 +269,7 @@
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv" onclick="clickFun(${lifelist.get(i).seq})">
 								<input type="hidden" class="seq" value="${lifelist.get(i).seq}">
-								<img src="b.png" class="slideImg">
+								<img src="${pageContext.request.contextPath}/files/${lifelist.get(i).file_path}" class="slideImg">
 								<h3 class="slideTitle">${lifelist.get(i).title}</h3>
 								<h5 class="slideExplan">${lifelist.get(i).content}</h5>
 							</div>
@@ -278,10 +278,10 @@
 					</div>
 
 					<div class="recruitment" id="study">공부</div>
-					<div class="slideShow" align="center" style="width: 1200px;">
+					<div class="slideShow" align="center" style="width:1200px;">
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv" onclick="clickFun(${studylist.get(i).seq})">
-								<img src="b.png" class="slideImg">
+								<img src="${pageContext.request.contextPath}/files/${studylist.get(i).file_path}" class="slideImg">
 								<h3 class="slideTitle">${studylist.get(i).title}</h3>
 								<h5 class="slideExplan">${studylist.get(i).content}</h5>
 							</div>
@@ -292,7 +292,7 @@
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv"
 								onclick="clickFun(${healthlist.get(i).seq})">
-								<img src="b.png" class="slideImg">
+								<img src="${pageContext.request.contextPath}/files/${healthlist.get(i).file_path }" class="slideImg">
 								<h3 class="slideTitle">${healthlist.get(i).title}</h3>
 								<h5 class="slideExplan">${healthlist.get(i).content}</h5>
 							</div>
@@ -302,7 +302,7 @@
 					<div class="slideShow" align="center" style="width: 1200px;">
 						<c:forEach var="i" begin="0" end="5">
 							<div class="slideDiv" onclick="clickFun(${exlist.get(i).seq})">
-								<img src="b.png" class="slideImg">
+								<img src="${pageContext.request.contextPath}/files/${exlist.get(i).file_path}" class="slideImg">
 								<h3 class="slideTitle">${exlist.get(i).title}</h3>
 								<h5 class="slideExplan">${exlist.get(i).content}</h5>
 							</div>
