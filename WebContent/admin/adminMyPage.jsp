@@ -118,7 +118,7 @@ Copyright ⓒ2019 Miwansung inc, ltd. All rights reserved</div><br>
             
         </div>
         
-        <ul class="navi">
+        <ul class="navi" style="position: absolute">
           <ul class="title">
            <li class="navi-title"><a href="#" style="font-family: 'Rock Salt', cursive; font-size:20px;">Don't Give Up</a></li>
             </ul>
