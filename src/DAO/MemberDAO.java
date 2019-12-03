@@ -94,7 +94,7 @@ public class MemberDAO {
 		try(Connection con = getConnection();
 				PreparedStatement psta = con.prepareStatement(sql);){
 			MemberDTO mypage = null;
-
+			System.out.println(id);
 			psta.setString(1, id);
 
 			try(ResultSet rs = psta.executeQuery();){

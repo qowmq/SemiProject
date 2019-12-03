@@ -28,13 +28,10 @@ public class MyPageServlet extends HttpServlet {
 
 		System.out.println(cmd);
 		if (cmd.equals("/MyPoint.mypage")) {
-			String id = "point";
-			request.getSession().setAttribute("id", id);
+			String id = (String) request.getSession().getAttribute("id");
 		
 			try {
-				Date date = new Date();
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				request.setAttribute("today", format.format(date).toString());
+
 
 				MemberDTO MemberDTO = MemberDAO.getInstance().select(id);
 				request.setAttribute("dto", MemberDTO);

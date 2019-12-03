@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -304,53 +306,46 @@ th {
 					<th width="80%" style="text-align: center">${dto.getout }
 				</tr>
 			</table>
-			<br> <br>
+			<br> <br> <br> <br>
+			<c:choose>
+				<c:when test="${fn:length(list) ne 0 }">
+					<h1 style="text-align: center">참여중인 챌린지</h1>
 
-			<h1 style="text-align: center">참여중인 챌린지</h1>
-			<br> <br>
-			<table class="listboard">
-				<c:choose>
-					<c:when test="${dto.size() == 0 }">
-						<tr>
-							<td style="text-align: center;">참여 중인 챌린지가 없습니다.
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<ul class="list-group list-group-flush border-none">
-								<li class="list-group-item  border-gray">
-									<div class="row border-dark">
-										<div class="col text-center">챌린지 번호</div>
-										<div class="col text-center">챌린지명</div>
-										<div class="col text-center">카테고리</div>
-										<div class="col text-center">구분</div>
-										<div class="col text-center">포인트</div>
-										<div class="col text-center">상태</div>
+					<ul class="list-group list-group-flush border-none">
+						<li class="list-group-item  border-gray">
+							<div class="row border-dark">
+								<div class="col text-center">챌린지 번호</div>
+								<div class="col text-center">챌린지명</div>
+								<div class="col text-center">카테고리</div>
+								<div class="col text-center">구분</div>
+								<div class="col text-center">포인트</div>
+								<div class="col text-center">상태</div>
 
-									</div>
-								</li>
-							</ul>
-						</tr>
-						<c:forEach items="${list}" var="dto">
-							<tr>
-							<ul class="list-group list-group-flush border-none">
-								<li class="list-group-item  border-gray">
-									<div class="row border-dark">
-										<div class="col text-center">${dto.seq}</div>
-										<div class="col text-center">${dto.title }</div>
-										<div class="col text-center">${dto.category }</div>
-										<div class="col text-center">${dto.giveortake}</div>
-										<div class="col text-center">${dto.pp_point }</div>
-										<div class="col text-center">${dto.end }</div>
-									</div>
-								</li>
-							</ul>
-						</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-				</tr>
-			</table>
+							</div>
+						</li>
+					</ul>
+					<c:forEach items="${list}" var="dto">
+
+						<ul class="list-group list-group-flush border-none">
+							<li class="list-group-item  border-gray">
+								<div class="row border-dark">
+									<div class="col text-center">${dto.seq}</div>
+									<div class="col text-center">${dto.title }</div>
+									<div class="col text-center">${dto.category }</div>
+									<div class="col text-center">${dto.giveortake}</div>
+									<div class="col text-center">${dto.pp_point }</div>
+									<div class="col text-center">${dto.end }</div>
+								</div>
+							</li>
+						</ul>
+
+					</c:forEach>
+
+				</c:when>
+				<c:otherwise>
+					<h4 style="text-align: center">참여 중인 챌린지가 없습니다.</h4>
+				</c:otherwise>
+			</c:choose>
 			<br> <br>
 		</div>
 

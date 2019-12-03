@@ -81,8 +81,7 @@ package Controller;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-				else if(realPath.contentEquals("/admin/memberlist.mem")) { //멤버리스트 클릭했을때 주소받아오기
+			}else if(realPath.contentEquals("/admin/memberlist.mem")) { //멤버리스트 클릭했을때 주소받아오기
 					request.setCharacterEncoding("utf8");
 					try {
 						String navi = dao.getPageNavi(1);

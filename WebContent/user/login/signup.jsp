@@ -26,8 +26,18 @@
 <link
    href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
    rel="stylesheet">
-
+<link
+   href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap"
+   rel="stylesheet">
 <style>
+@font-face {
+   font-family: '양진체';
+   src:
+      url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
 body {
    margin: 0px;
    padding: 0px;
@@ -46,25 +56,24 @@ body {
    margin: 0px;
    overflow: hidden;
    padding: 0px;
-   width: 60%;
-   left: 20%;
-   background-color: #FFFFFF90;
+   width: 900px;   
+    left: 26.4%;
    font-family: fantasy;
    font-size: 20px;
+   border-bottom:3px solid black;
 }
 
 .title {
    margin: 0px;
    padding: 0px;
-   width: 50%;
+   width: 50%;   
 }
 
 .itemList {
    position: absolute;
    margin: 0px;
    padding: 0px;
-   right: 0px;
-   width: 50%;
+   right: 15px;
 }
 
 .navi-title {
@@ -78,10 +87,8 @@ body {
 
 .navi-item {
    list-style-type: none;
-   width: 30%;
    line-height: 72px;
    float: left;
-   text-align: center;
    color: black;
 }
 
@@ -141,28 +148,16 @@ body {
 }
 
 .onefloor {
-   border-bottom: 3px solid black;
    border-top: 3px solid black;
    border-radius: 3px;
 }
 
 .twofloor {
-   border-bottom: 3px solid black;
    border-radius: 3px;
-}
 
 .threefloor {
-   border-bottom: 3px solid black;
    border-radius: 3px;
    height: 50px;
-}
-
-.fivefloor {
-   border-top: 3px solid black;
-   border-radius: 3px;
-   width: 60%;
-   background-color: gainsboro;
-    margin: auto;
 }
 
 .progress {
@@ -170,12 +165,10 @@ body {
    width: 90%;
    height: 10%;
 }
-
 .submenu {
    font-family: 'Calistoga', cursive;
    color: black;
 }
-
 .sidebar {
    height: 51px;
    font-family: 'Calistoga', cursive;
@@ -234,9 +227,6 @@ tr {
    border: 1px solid black;
    color: white;
 }
-.main {
-   
-}
 </style>
 
 </head>
@@ -245,9 +235,9 @@ tr {
       <img
          src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg"
          class="back"
-         style="position: fixed; z-index: -500; filter: blur(4px);">
+         style="position: fixed; z-index: -500; filter: blur(4px); ">
    </div>
-   <div class="container">
+   <div class="container" style="width:900px;">
 
       <br> <br> <br>
       <div class="twofloor"></div>
@@ -255,15 +245,13 @@ tr {
       <div class="fourthfloor">
 
          <form action="signup.mem" method="post" id="signfrm">
-            <div class="main">
-
+            <div class="main" style="padding: 33px 0px 0px 0px;">
                <!-- Sign up form -->
-               <section class="signup">
+               <section class="signup" style="margin:0px">
                   <div class="container">
-                     <div class="signup-content">
+                     <div class="signup-content" >
                         <div class="signup-form">
-                           <h2 class="form-title">Sign up</h2>
-                           <form method="POST" class="register-form" id="register-form">
+                           <h2 class="form-title" style="font-weight: bold;">Sign up</h2>
                               <div class="form-group">
                                  <label for="re-pass" class="labelTag"><i
                                     class="zmdi zmdi-lock-outline"></i></label> <input type="text"
@@ -302,15 +290,10 @@ tr {
                                     name="email" id="email" placeholder="abc123@def.com" />
                                     <span id="emailresult"></span>
                               </div>
-                              <!-- <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                            </div> -->
                               <div class="form-group form-button">
                                  <input type="submit" name="confirm" id="confirm"
-                                    class="form-submit" value="Register" />
+                                    class="form-submit" value="Join" />
                               </div>
-                           </form>
                         </div>
                         <div class="signup-image">
                            <figure>
@@ -325,7 +308,7 @@ tr {
       </div>
       <div class="bottom"></div>
    </div>
-   <div class="fivefloor">
+   <div class="fivefloor" style="width: 900px; background-color:gainsboro; margin:auto">
       <ul class="lastbar">
          <li class="navi-item3"><a href="#">COMPANY</a></li>
          <li class="navi-item3"><a href="#">POLICIES</a></li>
@@ -367,15 +350,12 @@ tr {
    </div>
    <ul class="navi">
       <ul class="title">
-         <li class="navi-title"><a href="#"><img
-               src="Img/reallogo.png" class="mr-3" alt="..."
-               style="width: 135px; height: 50px; margin-left: 10%;"></a></li>
+         <li class="navi-title"><a href="${pageContext.request.contextPath }/index.jsp"
+            style="font-family: 'Rock Salt', cursive; font-size: 20px;">Don't
+               Give Up</a></li>
       </ul>
       <ul class="itemList">
-
-         <li class="navi-item"><a href="#">GIVE OR TAKE</a></li>
-         <li class="navi-item"><a href="#">CHALLENGE</a></li>
-         <li class="navi-item"><a href="#">MYPAGE</a></li>
+         <li class="navi-item" style="font-family: 양진체; font-weight: bold;">당신의 오늘을 배팅하라!</li>
       </ul>
    </ul>
 

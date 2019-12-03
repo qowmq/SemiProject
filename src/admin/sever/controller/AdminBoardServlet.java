@@ -159,7 +159,7 @@ public class AdminBoardServlet extends HttpServlet {
 				System.out.println(contents);
 
 				ChallengeDTO dto = new ChallengeDTO(0, title, contents, start_date, end_date, "N", 0, oriFileName,
-						giveortake, category, 10000, 10000);
+						giveortake, category, 10000, 0);
 
 					int result = ChallengeDAO.getInstance().insertWrite(dto);
 					System.out.println(result);
@@ -313,7 +313,7 @@ public class AdminBoardServlet extends HttpServlet {
 				System.out.println(contents);
 				System.out.println(startdt);
 				System.out.println(enddt);
-				ChallengeDTO dto = new ChallengeDTO(0,title,contents,startdt,enddt,end,0,oriFileName,giveortake,category,10000,10000);
+				ChallengeDTO dto = new ChallengeDTO(0,title,contents,startdt,enddt,end,0,oriFileName,giveortake,category,10000,0);
 
 				try {
 					int result = ChallengeDAO.getInstance().update(dto, seq);
