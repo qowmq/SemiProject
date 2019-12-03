@@ -12,7 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <link href="https://fonts.googleapis.com/css?family=Calistoga&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap" rel="stylesheet">
-	   <style>
+      <style>
 @font-face { font-family: '양진체'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BMEULJIRO'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff'); font-weight: normal; font-style: normal; }
 </style>
@@ -38,7 +38,7 @@
                     padding:0px;
                     width:60%;
                     left: 20%;              
-                    background-color: #FFFFFF90;
+                    background-color: white;
                     font-family:fantasy;
                     font-size: 20px;
 
@@ -119,12 +119,9 @@
                     height:100%;
                     display: block;
                 }
-                .navi-item>a:hover{
-                    background-color: orange;
-
-                }
+                
                 .container{
-                    background-color: #ededed;
+                    background-color: white;
                     width:60%;
                     margin:auto;
                     margin-top:0px;
@@ -152,7 +149,7 @@
                     border-top: 3px solid #1D1F21;
                     border-radius: 3px;
                     width: 100%;
-                    background-color: gainsboro;
+                    background-color: white;
                 }
                 .progress{
                     display: inline-block;
@@ -165,8 +162,8 @@
                     left: 5%;
                     width: 13%;
                     height: 150px;
-                    border: 3px solid #1D1F21;
-                   
+                    
+                      background-color: white;
                 }
                
                 #enjoybtn{
@@ -216,11 +213,11 @@
                     border : 1px solid black;
                 }
                 td{
-                	border : 1px solid black;
+                   border : 1px solid black;
            
                 }
                 th{
-                	border : 1px solid black;
+                   border : 1px solid black;
                 }
             </style>
 </head>
@@ -250,7 +247,7 @@
                         <c:choose>
                         <c:when test="${dto == null }">
                         <c:choose>
-                        	<c:when test="${list.size() == 0 }">
+                           <c:when test="${list.size() == 0 }">
                                 <tr>
                                     <td colspan=2>표시할 내용이 없습니다.
                                 </tr>
@@ -266,13 +263,13 @@
                             </c:choose>
                         </c:when>
                         <c:otherwise>
-                        	<c:forEach items="${dto }" var="item">
-                        	<tr>
-                        		<td>${item.id }
-                        		<td><a href="${pageContext.request.contextPath}/memberlist.adboard?id=${item.id}">${item.name }</a>
-                        	</tr>
-                        	
-                        	</c:forEach>
+                           <c:forEach items="${dto }" var="item">
+                           <tr>
+                              <td>${item.id }
+                              <td><a href="${pageContext.request.contextPath}/memberlist.adboard?id=${item.id}">${item.name }</a>
+                           </tr>
+                           
+                           </c:forEach>
                         </c:otherwise>
                             
                         </c:choose>
@@ -280,16 +277,16 @@
                         
                         </tr>
                         <tr>
-               				<tr>
-                        	<td colspan=2 style="text-align: center">${navi }
-                     		</tr>
+                           <tr>
+                           <td colspan=2 style="text-align: center">${navi }
+                           </tr>
                         </tr>
                         <tr>
                         <td colspan=2 style="text-align: right">
                         <form action="search.mem" method="post" id="searchfrm">
-                        	<input type=text placeholder="아이디로 검색하기" name="search" style=" font-family: 'BMEULJIRO';">
-                        	<input type="button" value="검색" id="searchbtn" style="background-color:black; border-radius:4px; color:white; font-family: 'BMEULJIRO';">
-                        	</form>
+                           <input type=text placeholder="아이디로 검색하기" name="search" style=" font-family: 'BMEULJIRO';">
+                           <input type="button" value="검색" id="searchbtn" style="background-color:black; border-radius:4px; color:white; font-family: 'BMEULJIRO';">
+                           </form>
                         </tr>
                         <tr>
                         <td colspan=2 style="text-align: right"><input type="button" id="back" value="돌아가기" style="background-color:black; border-radius:4px; color:white; font-family: 'BMEULJIRO';">
@@ -329,43 +326,32 @@
                     <a href="#"><img src="${pageContext.request.contextPath }/resources/img/icon3.png" class="mr-3" alt="..." style="width:50px; height:50px; margin-left: 10%; margin: 0px;"></a></div>
                 <br>
             </div>
-            </div>
+            </div>            
             <div class="category">
-                <div class="wrapper">
-                <ul style="list-style-type: none; padding: 0; text-align: center;">
-                <li><a href="${pageContext.request.contextPath}/adminChallenge/adminMyPage.jsp" style="color: black; font-weight: bold">Manager Home</a>
-                <br><br>
-                <li><a href="memberlist.mem" style="color: black">Member List</a>
-                <li><a href="#" style="color: black;">Board List</a>
-                <li><a href="#" style="color: black;">write Board</a>
-                </ul>
-                    
-                </div>
-            </div>
-            <div class="category" style="background-color:#FFFFFF;">
-		<div class="wrapper">
-			<br>
-			
-			<div class="sidebar">
-				<img src="${pageContext.request.contextPath }/resources/img/inforcon.png" style="widht:30px;height:30px;">
-			</div>
-			<div class="sidebar">
-			<a href="myPageDetailView.mypage?id=${id }" style="font-family: 양진체; font-weight:bold;">My Information</a>
-			</div>
-			<div class="sidebar">
-				<img src="${pageContext.request.contextPath }/resources/img/challcon.png" style="widht:30px;height:30px;">
-				
-			</div>
-			<div class="sidebar">
-				<a href="#" style="font-family: 양진체; font-weight:bold;">My Challenge</a>
-			</div>
-			<div class="sidebar">
-				<img src="${pageContext.request.contextPath }/resources/img/cashcon.png" style="widht:30px;height:30px;">
-			</div>
-			<div class="sidebar">
-				<a href="#" style="font-family: 양진체; font-weight:bold;">My Point</a>
-			</div>
-		</div>
+      <div class="wrapper" style="background-color: white; border: 3px solid black; ">
+         <br>
+         <div class="sidebar">
+            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2018/240/iconmonstr-marketing-29.png" style="widht:30px;height:30px;">
+         </div>
+         <div class="sidebar">
+         <a href="#" style="font-family: 양진체; color: black; font-weight:bold;">Member List</a>
+         </div>
+         <div class="sidebar">
+            <img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2018/png/iconmonstr-task-thin.png&r=0&g=0&b=0" style="widht:30px;height:30px;">
+            
+         </div>
+         <div class="sidebar">
+            <a href="../list.adboard" style="font-family: 양진체; color: black; font-weight:bold; color: black">Board List</a>
+         </div>
+         <div class="sidebar">
+            <img src="https://cdns.iconmonstr.com/wp-content/assets/preview/2018/240/iconmonstr-pencil-thin.png" style="widht:30px;height:30px;">
+         </div>
+         <div class="sidebar">
+            <a href="writeBoard.jsp" style="font-family: 양진체; font-weight:bold; color: black;">write Board</a>
+         </div>
+      </div>
+   </div>
+            
             <ul class="navi">
                 <ul class="title">
                     <li class="navi-title"><a href="#" style="font-family: 'Rock Salt', cursive; font-size:20px;">
@@ -375,21 +361,28 @@
                 </ul>
                 <ul class="itemList">
 
-                  <li class="navi-item"><a href="#"  style="font-family: 양진체; font-weight:bold;">ADMIN PAGE</a></li>
-            <li class="navi-item"><a href="#"  style="font-family: 양진체; font-weight:bold;">LOGOUT</a></li>
+                  <li class="navi-item"><a href="adminMyPage.jsp"  style="font-family: 양진체; font-weight:bold;">ADMIN PAGE</a></li>
+            <li class="navi-item"><button id="logoutbtn" style="font-family: 양진체; font-weight:bold; border: none; background-color: white">LOGOUT</button></li>
                 </ul>
             </ul>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
             
             <script>
-            	$("#searchbtn").on("click", function(){
-            		$("#searchfrm").submit();
-            	})
-            	
-            	$("#back").on("click", function(){
-            		location.href="adminMyPage.jsp";
-            	})
+               $("#searchbtn").on("click", function(){
+                  $("#searchfrm").submit();
+               })
+               
+               $("#back").on("click", function(){
+                  location.href="adminMyPage.jsp";
+               })
+               
+               $("#logoutbtn").on("click",function(){
+              var result = confirm("로그아웃 하시겠습니까?");
+              if(result){
+                 location.href="logout.mem";
+              }
+              })
             </script>
 </body>
 </html>
