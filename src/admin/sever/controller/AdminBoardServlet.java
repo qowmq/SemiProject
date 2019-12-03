@@ -173,12 +173,11 @@ public class AdminBoardServlet extends HttpServlet {
 			String id = request.getParameter("id");
 
 			System.out.println("넘어온 아이디 값은 : " + id);
-			Challenge_recordDTO recoardDTO = new Challenge_recordDTO();
-			ChallengeDTO challengeDTO = new ChallengeDTO();
+			List<ChallengeDTO> list = new ArrayList<>();
 			try {
-				//recoardDTO = ChallengeRecordDAO.getInstance().detailChallenge(id); //참여한 챌린지의 seq얻음
+				list = ChallengeRecordDAO.getInstance().detailChallengeList(id); //참여한 챌린지의 seq얻음
 
-				request.setAttribute("recoardDTO", recoardDTO);
+				request.setAttribute("list", list);
 
 				request.getRequestDispatcher("/admin/detailmemberlist.jsp").forward(request, response);
 

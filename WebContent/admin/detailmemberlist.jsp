@@ -281,26 +281,32 @@ th {
 					<th width="20%" style="text-align: center">탈퇴여부
 					<th width="80%" style="text-align: center">${dto.getout }
 				</tr>
-				</table>
-<br><br>
+			</table>
+			<br>
+			<br>
 
-<h1 style = "text-align :center">참여중인 챌린지</h1>
-<br><br>
-<table class="listboard">
+			<h1 style="text-align: center">참여중인 챌린지</h1>
+			<br>
+			<br>
+			<table class="listboard">
 				<c:choose>
 					<c:when test="${dto.size() == 0 }">
-						<tr><td style="text-align:center;">참여 중인 챌린지가 없습니다.</tr>
+						<tr>
+							<td style="text-align: center;">참여 중인 챌린지가 없습니다.
+						</tr>
 					</c:when>
 					<c:otherwise>
-					<c:forEach items="${list}" var="dto">
-					<tr>
-					<th width="100%" style="text-align: center"><a href = "${pageContext.request.contextPath}/detail.adboard?seq=${dto.seq}">${dto.title}</a>
-					</c:forEach>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<th width="100%" style="text-align: center"><a
+									href="${pageContext.request.contextPath}/detail.adboard?seq=${dto.seq}">${dto.title}</a>
+						</c:forEach>
 					</c:otherwise>
-					</c:choose>
-					</tr>
+				</c:choose>
+				</tr>
 			</table>
-			<br><br>
+			<br>
+			<br>
 		</div>
 
 	</div>
@@ -346,17 +352,19 @@ th {
 		<br>
 	</div>
 	<div class="wrapper">
-	<div class="category">
-		<ul style="list-style-type: none; padding: 0; text-align: center;">
-			<li><a
-				href="${pageContext.request.contextPath}/adminChallenge/adminMyPage.jsp"
-				style="color: black; font-weight: bold">Manager Home</a> <br> <br>
-			<li><a href="memberlist.mem" style="color: black">Member
-					List</a>
-			<li><a href="list.adboard" style="color: black;">Board List</a>
-			<li><a href="list.adboard" style="color: black;">write Board</a>
-		</ul>
-</div>
+		<div class="category">
+			<ul style="list-style-type: none; padding: 0; text-align: center;">
+				<li><a
+					href="${pageContext.request.contextPath}/adminChallenge/adminMyPage.jsp"
+					style="color: black; font-weight: bold">Manager Home</a> <br>
+					<br>
+				<li><a href="memberlist.mem" style="color: black">Member
+						List</a>
+				<li><a href="list.adboard" style="color: black;">Board List</a>
+				<li><a href="list.adboard" style="color: black;">write
+						Board</a>
+			</ul>
+		</div>
 	</div>
 	</div>
 	<ul class="navi">

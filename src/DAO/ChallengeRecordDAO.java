@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
@@ -152,6 +153,36 @@ public class ChallengeRecordDAO {
 			
 		}
 	}
+	
+	public List<ChallengeDTO> detailChallengeList (String id) throws SQLException, Exception {
+		String sql ="select ch.seq, ch.title, ch.start_date, ch.end_date, ch.end, ch.total_participate, ch.giveortake, ch.category, ch.pp_point from challenge ch, challenge_record cr where ch.seq = cr.challenge_numm and cr.memeber_id = ?";
+		try(Connection conn = getConnection();
+				//PreparedStatement pstat = conn.prepareStatement(sql);
+				PreparedStatement pstat =new LoggableStatement(conn, sql);){
+			pstat.setString(1, id);
+			System.out.println(((LoggableStatement)pstat).getQueryString());
+			try(ResultSet rs = pstat.executeQuery()){
+				List<ChallengeDTO> list = new ArrayList<>();
+				
+				if(rs.next()) {
+					ChallengeDTO dto = new ChallengeDTO();
+					dto.setSeq(rs.getInt("seq"));
+					dto.setTitle(rs.getString("title"));
+					dto.setStart_date(rs.getString("start_date"));
+					dto.setEnd_date(rs.getString("start_date"));
+					dto.setEnd(rs.getString("end"));
+					dto.setTotal_participate(rs.getInt("total_participate"));
+					dto.setGiveortake(rs.getString("giveortake"));
+					dto.setCategory(rs.getString("category"));
+					dto.setPp_point(rs.getInt("pp_point"));
+					list.add(dto);
+				}				
+				return list;				
+			}
+			
+		}
+	}
+	
 	public boolean idCompare(String id, int seq) throws SQLException, Exception {
 		String sql ="select * from challenge_record where memeber_id=? and challenge_numm=?";
 		try(Connection conn = getConnection();
