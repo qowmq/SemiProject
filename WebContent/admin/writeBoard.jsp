@@ -70,6 +70,14 @@
                      type=file name=file1 style=" border-radius:4px; font-family: 'BMEULJIRO'; color:#1D1F21;">
                </tr>
                <tr>
+               		<td>
+               			<select name="day">
+               				<option value="all">월~
+               			</select>
+               		</td>
+               		<td></td>
+               </tr>
+               <tr>
                   <td><textarea name="content" rows="30" cols="100"></textarea>
                </tr>
                <tr>

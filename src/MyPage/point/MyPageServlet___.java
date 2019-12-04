@@ -11,14 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.ChallengeDAO;
+import DAO.ChallengeRecordDAO;
 import DAO.MemberDAO;
 import DAO.PaymentDAO;
+import DTO.Challenge_recordDTO;
 import DTO.MemberDTO;
 import DTO.PaymentDTO;
 
 
-@WebServlet("*.mypage")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("*.mypagegg")
+public class MyPageServlet___ extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf8");
 		String requestURI = request.getRequestURI();
@@ -31,15 +34,14 @@ public class MyPageServlet extends HttpServlet {
 			String id = (String) request.getSession().getAttribute("id");
 		
 			try {
-
-
 				MemberDTO MemberDTO = MemberDAO.getInstance().select(id);
 				request.setAttribute("dto", MemberDTO);
 				System.out.println(MemberDTO.getPoint());
-				List<PaymentDTO> list = PaymentDAO.getInstance().selectById(id);
-				request.setAttribute("list", list);
-
-
+				List<PaymentDTO> PaymentList = PaymentDAO.getInstance().selectById(id);
+				request.setAttribute("PaymentList", PaymentList);
+				
+				List<Challenge_recordDTO> challengeList = ChallengeRecordDAO.getInstance().challengeEnjoy(id);
+				request.setAttribute("challengeList", challengeList);
 
 				request.getRequestDispatcher("/user/myPage/MyPoint.jsp").forward(request, response);
 			} catch (Exception e) {

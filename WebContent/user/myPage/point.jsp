@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<title>My Page</title>
+<title>My Point</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.0.2.min.js"
 	type="application/javascript"></script>
@@ -313,7 +313,7 @@ body {
 					</div>
 				</div>
 				<c:choose>
-					<c:when test="${fn:length(list) ne 0}">
+					<c:when test="${fn:length(PaymentList) ne 0}">
 						<div class="threefloor">
 							<div class="row">
 								<div class="col">
@@ -333,7 +333,7 @@ body {
 														<li class="list-group-item  border-gray">
 															<div class="row border-dark">
 																<div class="col text-center">금액</div>
-																<div class="col text-center">결제수단</div>
+																<div class="col text-center">결제수단/ 번호</div>
 																<div class="col text-center">일자</div>
 																<div class="col text-center">기타</div>
 															</div>
@@ -341,13 +341,26 @@ body {
 														<c:forEach items="${list}" var="dto">
 															<li class="list-group-item">
 																<div class="row payrow border-secondary">
-																	<div class="col text-center">${dto.point}원</div>
+																	<div class="col text-center">+ ${dto.point}</div>
 																	<div class="col text-center">${dto.company}</div>
 																	<div class="col text-center">${dto.payment_date}</div>
 																	<div class="col text-center"></div>
 																</div>
 															</li>
 														</c:forEach>
+														<c:if test="${fn:length(challengeList) ne 0}">
+															<c:forEach items="${challengeList }" var="dto">
+																<li class="list-group-item">
+																	<div class="row payrow border-secondary">
+																		<div class="col text-center">- 10000</div>
+																		<div class="col text-center">${dto.seq}</div>
+																		<div class="col text-center">${dto.enjoyDate }</div>
+																		<div class="col text-center"></div>
+																	</div>
+																</li>
+															</c:forEach>
+
+														</c:if>
 													</ul>
 												</div>
 											</div>
@@ -361,9 +374,7 @@ body {
 
 					</c:otherwise>
 				</c:choose>
-				<div class="fourfloor">
-				
-				</div>
+				<div class="fourfloor"></div>
 				<div class="fivefloor" style="background-color: white;">
 					<ul class="lastbar">
 						<li class="navi-item3"><a href="#">COMPANY</a></li>
@@ -421,7 +432,7 @@ body {
 							style="widht: 30px; height: 30px;">
 					</div>
 					<div class="sidebar">
-						<a href="myPageDetailView.mypage?id=${id }"
+						<a href="myPageDetailView.usboard?id=${id }"
 							style="font-family: 양진체; font-weight: bold;">My Information</a>
 					</div>
 					<div class="sidebar">
@@ -431,7 +442,7 @@ body {
 
 					</div>
 					<div class="sidebar">
-						<a href="#" style="font-family: 양진체; font-weight: bold;">My
+						<a href="${pageContext.request.contextPath }/banner.usboard" style="font-family: 양진체; font-weight: bold;">My
 							Challenge</a>
 					</div>
 					<div class="sidebar">
@@ -440,14 +451,14 @@ body {
 							style="widht: 30px; height: 30px;">
 					</div>
 					<div class="sidebar">
-						<a href="MyPoint.mypage"
+						<a href="#"
 							style="font-family: 양진체; font-weight: bold;">My Point</a>
 					</div>
 				</div>
 			</div>
 			<ul class="navi">
 				<ul class="title">
-					<li class="navi-title"><a href="#"
+					<li class="navi-title"><a href="donation.challenge"
 						style="font-family: 'Rock Salt', cursive; font-size: 20px;">Don't
 							Give Up</a></li>
 				</ul>

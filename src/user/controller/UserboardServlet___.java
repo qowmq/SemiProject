@@ -1,4 +1,4 @@
-package user.server.controller;
+package user.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ import DAO.ChallengeDAO;
 import DTO.ChallengeDTO;
 
 @WebServlet("*.board")
-public class UserboardServlet extends HttpServlet {
+public class UserboardServlet___ extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

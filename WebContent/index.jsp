@@ -84,8 +84,7 @@
     }
   </script>
 </head>
-
-<body>
+<body class="animated fadeIn delay-0.7s">
   <div class="wrap">
     <div class="box firstBox">
       <img src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg" class="backgroundImg firstImg">

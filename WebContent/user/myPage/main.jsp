@@ -11,15 +11,16 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
-   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-   crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap" rel="stylesheet">
+   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap" rel="stylesheet">
 <style>
 @font-face { font-family: '양진체'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BMEULJIRO'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff'); font-weight: normal; font-style: normal; }
 </style>
-<title>Insert title here</title>
+<title>마이페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
@@ -33,8 +34,7 @@
 <link
    href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
    rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/resources/css/MyPageStyle.css">
+<link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath}/resources/css/MyPageStyle.css">
 
 
 
@@ -44,62 +44,136 @@
 <img src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg" class="back" style="position:fixed; z-index:-500;filter: blur(4px);">
 </div>
 
-   <div class="container">
+   <div class="container" style="background-color:#FFFFFF">
       <br> <br> <br>
 
       <div class="onefloor" style="text-align: center;">
          <br>
          <div style="text-align: start; margin-left: 5%;">
-            <a href="#" class="submenu"></a>
+            <a href="myPageDetailView.mypage?id=${id }" class="submenu" style=" font-family: 'BMEULJIRO';">My Information</a>
          </div>
          <br> <br>
          <div class="media">
             <img src="${pageContext.request.contextPath}/resources/img/profileicon.png"
                class="mr-3" alt="..."
                style="width: 100px; height: 100px; margin-left: 10%;">
-            <div class="media-body" style="font-family: 'BMEULJIRO';">
+            <div class="media-body">
                <br>
-               <h5 class="mt-0">${id }님의마이페이지입니다.</h5>
-               내일은 챌린지 성공하자!
+               <h5 class="mt-0"style=" font-family: 'BMEULJIRO';">${id}님의 마이페이지입니다.</h5>
+               
             </div>
-            
+
+
          </div>
-                 <br><br>
+
+         <br>
+         <div class="progress">
+            <label for="file">나의 경험치:</label>
+
+            <progress id="file" max="100" value="70"
+               style="width: 100%; background-color: purple;"> 70% </progress>
+         </div>
+         <br> <br>
       </div>
 
-      
+      <div class="twofloor">
+         <br> <br>
+         <div style="text-align: start; margin-left: 5%;">
+            <a href="MyPoint.usboard" class="submenu"style=" font-family: 'BMEULJIRO';">My Point </a>
+         </div>
+         <br> <br>
+         <h1 style="margin-left: 15%;">My Point is ${dto.point}</h1>
+         <br> <br>
+      </div>
 
       <div class="threefloor">
          <br> <br>
          <div style="text-align: start; margin-left: 5%;">
-            <a href="#" class="submenu">My Information</a><br><br>
-            <div>회원아이디 : "${list.id }"</div><br>
-            <div>회원이름 : "${list.name }</div><br>
-            <div>회원번호 : "${list.phone }</div><br>
-            <div>회원이메일 : "${list.email }</div>
+            <a href="#" class="submenu" style=" font-family: 'BMEULJIRO';">My Challenge</a>
          </div>
-         <br><br>
+         <br> <br>
+      
+         <c:choose>
+            <c:when test="${giveList.size() eq 0 || giveList eq null}">
+
+               <div style="text-align: start; margin-left: 5%; font-weight: 700; font-size: 20px; font-family: 'BMEULJIRO'">기부</div>
+               <div class="row" style="width:100%; margin:auto;">
+                  <div class="col-12 p-4 m-1" style="background:white; width:100%;">
+                     <div>존재하는 챌린지가 없습니다.</div>
+                  </div>
+               </div>
+
+            </c:when>
+            <c:otherwise>
+               <div
+                  style="text-align: start; margin-left: 5%; font-weight: 700; font-size: 20px; font-family: 'BMEULJIRO';">기부</div>
+               <div class="row">
+
+                  <c:forEach items="${giveList}" var="dto">
+
+                     <div class="col-4">
+
+                        <a
+                           href="${pageContext.request.contextPath}/myPageDetailView.usboard?challengeSeq=${dto.seq}">
+                           <div class="card m-3">
+                              <img src="${dto.file_path}" class="card-img-top">
+                              <div class="card-body">
+                                 <h5 class="card-title">${dto.title }</h5>
+                                 <p class="card-text">참여인원 : ${dto.total_participate }</p>
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                  </c:forEach>
+               </div>
+
+            </c:otherwise>
+         </c:choose>
+         <c:choose>
+            <c:when test="${takeList.size() eq 0 || takeList eq null}">
+               <div
+                  style="text-align: start; margin-left: 5%; font-weight: 700; font-size: 20px; font-family: 'BMEULJIRO';" >테이크</div>
+               <div class="row mb-5" style="width:100%; margin:auto;">
+                  <div class="col-12 p-4 m-1" style="background:white; width:100%;">
+                     <div>존재하는 챌린지가 없습니다.</div>
+                  </div>
+
+               </div>
+            </c:when>
+            <c:otherwise>
+               <div
+                  style="text-align: start; margin-left: 5%; font-weight: 700; font-size: 20px;font-family: 'BMEULJIRO';">테이크</div>
+               <div class="row">
+                  <c:forEach items="${takeList}" var="dto">
+
+                     <div class="col-4">
+                        <a
+                           href="${pageContext.request.contextPath}/myBoardDetailView.usboard?challengeSeq=${dto.seq}">
+                           <div class="card m-3">
+
+                              <img src="${pageContext.request.contextPath}/files/${dto.file_path}" class="card-img-top">
+                              <div class="card-body">
+                                 <h5 class="card-title">${dto.title }</h5>
+                                 <p class="card-text">참여인원 : ${dto.total_participate }</p>
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+
+                  </c:forEach>
+               </div>
+            </c:otherwise>
+         </c:choose>
+
       </div>
    
 
 
    <br>
-   
-   
-   
 
 
-   <div class="fourfloor" style="text-align:center;">
-      <a href = "${pageContext.request.contextPath}/user/login/infoupdate.jsp"><input type = button value = "정보수정" style="background-color:black; border-radius:4px; color:white; font-family: 'BMEULJIRO';"></a>
-   <a href = "delete.mem?id=${id }"><input type = button value="회원탈퇴" id="delete" style="background-color:black; border-radius:4px; color:white; font-family: 'BMEULJIRO';"></a>
-   <br><br>
-   <script>
-   $("#delete").on("click", function(){
-      confirm("정말로 탈퇴하시겠습니까?")
-   })
-   </script>
-   </div>
-   <div class="fivefloor">
+   
+   <div class="fivefloor" style="background-color:white;">
       <ul class="lastbar">
          <li class="navi-item3"><a href="#">COMPANY</a></li>
          <li class="navi-item3"><a href="#">POLICIES</a></li>
@@ -139,9 +213,8 @@
       </div>
       <br>
    </div>
-   
    </div>
-   <div class="category" style="background-color:white;">
+   <div class="category" style="background-color:#FFFFFF;">
       <div class="wrapper">
          <br>
          
@@ -149,7 +222,7 @@
             <img src="${pageContext.request.contextPath }/resources/img/inforcon.png" style="widht:30px;height:30px;">
          </div>
          <div class="sidebar">
-         <a href="myPageDetailView.mypage?id=${id }" style="font-family: 양진체; font-weight:bold;">My Information</a>
+         <a href="myPageDetailView.usboard?id=${id }" style="font-family: 양진체; font-weight:bold;">My Information</a>
          </div>
          <div class="sidebar">
             <img src="${pageContext.request.contextPath }/resources/img/challcon.png" style="widht:30px;height:30px;">
@@ -162,14 +235,13 @@
             <img src="${pageContext.request.contextPath }/resources/img/cashcon.png" style="widht:30px;height:30px;">
          </div>
          <div class="sidebar">
-            <a href="MyPoint.mypage" style="font-family: 양진체; font-weight:bold;">My Point</a>
-         </div>
+            <a href="MyPoint.usboard" style="font-family: 양진체; font-weight:bold;">My Point</a>
          </div>
       </div>
    </div>
    <ul class="navi">
       <ul class="title">
-         <li class="navi-title"><a href="#" style="font-family: 'Rock Salt', cursive; font-size:20px;">Don't Give Up</a></li>
+         <li class="navi-title"><a href="donation.challenge" style="font-family: 'Rock Salt', cursive; font-size:20px;">Don't Give Up</a></li>
       </ul>
       <ul class="itemList">
             <li class="navi-item"></li>

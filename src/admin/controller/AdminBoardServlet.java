@@ -1,4 +1,4 @@
-package admin.sever.controller;
+package admin.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class AdminBoardServlet extends HttpServlet {
 
 				request.setAttribute("recordList", list);
 				request.setAttribute("dto", dto);
-				request.getRequestDispatcher("test.jsp").forward(request, response);
+				request.getRequestDispatcher("admin/adminDetailView.jsp").forward(request, response);
 
 			} catch (Exception e) {
 				System.out.println("nonono~~!!");
@@ -179,7 +179,7 @@ public class AdminBoardServlet extends HttpServlet {
 			List<ChallengeDTO> list = new ArrayList<>();
 			try {
 				dto = MemberDAO.getInstance().select(id);
-				list = ChallengeRecordDAO.getInstance().detailChallengeList(id); //참여한 챌린지의 seq얻음
+				list = ChallengeDAO.getInstance().detailChallengeList(id); //참여한 챌린지의 seq얻음
 				
 				request.setAttribute("list", list);
 				request.setAttribute("dto", dto);

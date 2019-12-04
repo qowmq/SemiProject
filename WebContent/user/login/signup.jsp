@@ -232,6 +232,11 @@ tr {
 </head>
 <body>
    <div>
+   <%
+            String uri = request.getHeader("Referer");
+            System.out.println("uri : " + uri);
+            request.getSession().setAttribute("uri", uri);
+         %>
       <img
          src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg"
          class="back"

@@ -267,7 +267,7 @@ img {
 		<br> <br> <br>
 		<div class="twofloor">
 			<div class="bd-example">
-				<img src="${dto.file_path}">
+				<img src="${pageContext.request.contextPath}/files/${dto.file_path}">
 			</div>
 
 		</div>

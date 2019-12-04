@@ -1,4 +1,4 @@
-package user.server.controller;
+package user.controller;
 
 import java.awt.print.Printable;
 import java.io.File;

@@ -1,4 +1,4 @@
-package Controller;
+package user.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

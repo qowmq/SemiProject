@@ -11,7 +11,8 @@ import java.util.List;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import DTO.MemberDTO;
-import configuration.Configuration;
+import adminboardCongiuration.Configuration;
+
 
 public class MemberDAO {
 
@@ -80,10 +81,11 @@ public class MemberDAO {
 	public int delete(String id) throws Exception{
 		String sql = "delete from member where id = ?";
 		try(Connection con = getConnection();
-				PreparedStatement psta = con.prepareStatement(sql);){
+				PreparedStatement psta = new LoggableStatement(con, sql);){
 			psta.setString(1, id);
-
+			System.out.println(((LoggableStatement)psta).getQueryString());
 			int result = psta.executeUpdate();
+			System.out.println(result);
 			con.commit();
 			return result;
 		}
@@ -311,7 +313,7 @@ public class MemberDAO {
 		int pageTotalCount = 0;//총 몇개의 페이지인지
 
 
-		if(recordTotalCount % Configuration.recordCountPerPage > 0) { // recordTotalCount를 recordCountPerPage로 나누었을때 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
+		if(recordTotalCount %  Configuration.recordCountPerPage> 0) { // recordTotalCount를 recordCountPerPage로 나누었을때 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
 			pageTotalCount = recordTotalCount/Configuration.recordCountPerPage +1;
 
 		}else {
@@ -328,7 +330,7 @@ public class MemberDAO {
 			currentPage = pageTotalCount;
 		}
 
-		int startNavi = ((currentPage-1) / Configuration.naviCountPerPage) * configuration.Configuration.naviCountPerPage + 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
+		int startNavi = ((currentPage-1) / Configuration.naviCountPerPage) * Configuration.naviCountPerPage + 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
 		int endNavi = startNavi + Configuration.naviCountPerPage - 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
 		if(endNavi > pageTotalCount) { //페이지 끝 값이 비정상적일때/ 총 15페이지가 있을때 15페이지를 선택하면 보여지는 네비는 11-20이 아니라 11-15여야함
 			endNavi = pageTotalCount;

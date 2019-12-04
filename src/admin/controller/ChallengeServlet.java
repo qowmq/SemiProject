@@ -1,9 +1,8 @@
-package admin.sever.controller;
+package admin.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import DAO.ChallengeDAO;
-import DAO.ChallengeRecordDAO;
 import DTO.ChallengeDTO;
 
 @WebServlet("*.challenge")
@@ -34,6 +36,23 @@ public class ChallengeServlet extends HttpServlet {
 				ArrayList<ChallengeDTO> lifelist = ChallengeDAO.getInstance().getCatergoryChallege("take", "생활");
 				ArrayList<ChallengeDTO> studylist = ChallengeDAO.getInstance().getCatergoryChallege("take", "공부");
 				ArrayList<ChallengeDTO> healthlist = ChallengeDAO.getInstance().getCatergoryChallege("take", "건강");
+				for(int i = 0; i < list.size(); i++) {
+		               String content = list.get(i).getContent();
+		                String text = "{" + content + "}";
+		                JsonParser parser = new JsonParser();
+		             JsonElement data = parser.parse(text);
+		             JsonObject obj = data.getAsJsonObject();
+		             String challengeday = obj.get("인증가능요일").getAsString(); 
+		             String challengefrequency = obj.get("인증빈도").getAsString();
+		             String challengetime = obj.get("인증가능시간").getAsString();
+		             String challengenumber = obj.get("하루인증횟수").getAsString(); //출력o
+		          
+		             request.setAttribute("challengeday"+i, challengeday);
+		            request.setAttribute("challengefrequency"+i, challengefrequency);
+		            request.setAttribute("challengetime"+i, challengetime);
+		            request.setAttribute("challengenumber"+i, challengenumber);
+		           }
+				
 				request.setAttribute("list", list);
 				request.setAttribute("exlist", exlist);
 				request.setAttribute("lifelist", lifelist);
@@ -57,6 +76,8 @@ public class ChallengeServlet extends HttpServlet {
 				ArrayList<ChallengeDTO> lifelist = ChallengeDAO.getInstance().getCatergoryChallege("give", "생활");
 				ArrayList<ChallengeDTO> studylist = ChallengeDAO.getInstance().getCatergoryChallege("give", "공부");
 				ArrayList<ChallengeDTO> healthlist = ChallengeDAO.getInstance().getCatergoryChallege("give", "건강");
+				
+				
 				request.setAttribute("healthlist", healthlist);
 				request.setAttribute("studylist", studylist);
 				request.setAttribute("lifelist", lifelist);

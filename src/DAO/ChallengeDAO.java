@@ -375,6 +375,35 @@ public class ChallengeDAO {
 		}
 	}
 	
+	public List<ChallengeDTO> detailChallengeList (String id) throws SQLException, Exception {
+		String sql ="select ch.seq, ch.title, ch.start_date, ch.end_date, ch.end, ch.total_participate, ch.giveortake, ch.category, ch.pp_point from challenge ch, challenge_record cr where ch.seq = cr.challenge_numm and cr.memeber_id = ?";
+		try(Connection conn = getConnection();
+				//PreparedStatement pstat = conn.prepareStatement(sql);
+				PreparedStatement pstat =new LoggableStatement(conn, sql);){
+			pstat.setString(1, id);
+			System.out.println(((LoggableStatement)pstat).getQueryString());
+			try(ResultSet rs = pstat.executeQuery()){
+				List<ChallengeDTO> list = new ArrayList<>();
+				
+				if(rs.next()) {
+					ChallengeDTO dto = new ChallengeDTO();
+					dto.setSeq(rs.getInt("seq"));
+					dto.setTitle(rs.getString("title"));
+					dto.setStart_date(rs.getString("start_date"));
+					dto.setEnd_date(rs.getString("start_date"));
+					dto.setEnd(rs.getString("end"));
+					dto.setTotal_participate(rs.getInt("total_participate"));
+					dto.setGiveortake(rs.getString("giveortake"));
+					dto.setCategory(rs.getString("category"));
+					dto.setPp_point(rs.getInt("pp_point"));
+					list.add(dto);
+				}				
+				return list;				
+			}
+			
+		}
+	}
+	
 	
 	public int updateTotalParticipate(int seq)throws Exception{
 	      String sql = "update challenge set total_participate = total_participate+1 where seq = ?";
