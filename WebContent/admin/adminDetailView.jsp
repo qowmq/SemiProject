@@ -236,17 +236,6 @@ body {
    height: 500px;
 }
 
-td {
-   border: 1px solid black;
-   width: 200px;
-   height: 200px;
-}
-
-img {
-   width: 100%;
-   hegiht: 100%;
-}
-
 .confirmDiv {
    padding-top: 30px;
 }
@@ -255,14 +244,13 @@ img {
 </head>
 <body>
 <div>
-<img src="${pageContext.request.contextPath }/resources/img/backgroundMain.jpg" class="back" style="position:fixed; z-index:-500;filter: blur(4px);">
+<img src="${pageContext.request.contextPath}/resources/img/backgroundMain.jpg" class="back" style="position:fixed; z-index:-500;filter: blur(4px);">
 </div>
    <div class="container">
       <br> <br> <br>
       <div class="onefloor" style="text-align:center; ">
          <div class="bd-example">
-            <img src="${dto.file_path}">
-
+            <img src="${pageContext.request.contextPath}/files/${dto.file_path}">
             <div style="font-size: 20px; font-family: 'BMEULJIRO';">Á¦¸ñ</div><br>
             <div> ${dto.title}</div>
          </div>
@@ -305,7 +293,7 @@ img {
                <tr>
                   <c:forEach items="${fileList}" var="fileitem">
                      <c:if test="${fileitem.challenge_record_num == record.seq}">
-                        <td><img src="${fileitem.file_path}"></td>
+                        <td style="width:111px;height:120px;"><img style="width:100%;height:100%;" src="${fileitem.file_path}"></td>
 
                      </c:if>
 

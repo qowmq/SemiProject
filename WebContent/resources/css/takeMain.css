@@ -55,17 +55,18 @@ a:hover {
 	border-bottom: 4px solid black;
 }
 
-.logoText {
-	font-size: 40px;
-	font-weight: bold;
-	margin: 20px;
-}
-
 .headerbackground {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	z-index: -1;
+}
+
+.logoText {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 25px;
+	position: absolute;
 }
 
 .navi {
@@ -99,36 +100,17 @@ a:hover {
 	font-size: 20px;
 }
 
-.giveBtn {
-	color: white;
-	background-color: black;
-	border-radius: 2px;
-	font-weight: bold;
-	font-size: 20px;
-	border-radius: 10px;
-	padding: 0px 10px;
-}
-
-.signUp {
+.giveBtn, .login, #mypage, #logout, .signUp {
+	font-family: '양진체';
 	margin-left: 40px;
-	color: white;
-	background: black;
-	border-radius: 2px;
+	color: black;
+	background: white;
+	border: none;
 	font-weight: bold;
 	font-size: 20px;
 	border-radius: 10px;
-	padding: 2px 10px;
-}
-
-.giveBtn, .login {
-	margin-left: 40px;
-	color: white;
-	background: black;
-	border-radius: 2px;
-	font-weight: bold;
-	font-size: 20px;
-	border-radius: 10px;
-	padding: 0px 10px;
+	padding: 5px 15px 0px 15px;
+	cursor: pointer;
 }
 /* 헤더 텍스트 */
 .headerExplan {
@@ -136,17 +118,17 @@ a:hover {
 }
 
 .firstText {
-	margin-top: 20px;
-	font-size: 80px;
+	margin-top: 80px;
+	font-size: 120px;
 	line-height: 140px;
 }
 
 .secondText {
-	font-size: 80px;
+	font-size: 120px;
 }
 /* 메인 */
 .container {
-	height: 2800px;
+	height: 3500px;
 }
 /* 메인카테고리 */
 .mainCategory {
@@ -178,22 +160,6 @@ a:hover {
 	font-size: 20px;
 	padding-top: 10px;
 }
-
-.firstCategoryImg:hover {
-	
-}
-
-.secondCategoryImg:hover {
-	
-}
-
-.thirdCategoryTitle:hover {
-	
-}
-
-.fourthCategoryTitle:hover {
-	
-}
 /* 챌린지 컨테이너 */
 .challengeContainer {
 	position: relative;
@@ -201,17 +167,17 @@ a:hover {
 	justify-content: space-between;
 	padding: 35px 0px 25px;
 	margin: 50px 300px;
-	height: 400px;
+	height: 700px;
 }
 
 .recruitment {
 	font-size: 30px;
-	margin-top: 20px;
+	margin-top: 30px;
 	padding-bottom: 10px;
 	font-weight: bold;
+	font-family: 'BMEULJIRO';
 	width: 1302px;
 	border-bottom: 1px solid #ccc;
-	font-family: 'BMEULJIRO';
 }
 
 .challengeMainBox {
@@ -285,7 +251,7 @@ a:hover {
 /* 챌린지 중간박스 */
 .challegneMiddleContainer {
 	width: 1300px;
-	height: 1800px;
+	height: 1550px;
 }
 /* slideShow */
 .slideShow {
@@ -297,19 +263,19 @@ a:hover {
 	color: black;
 }
 
-.slideDiv {
-	margin: 20px;
-	border: 1px solid black;
-}
-
 .slideTitle {
 	font-family: 'BMEULJIRO';
 	font-weight: normal;
 }
 
+.slideDiv {
+	margin: 20px;
+}
+
 .slideImg {
 	width: 100%;
 	height: 200px;
+	border-radius: 10px;
 }
 /* 하단바 */
 .footer {
@@ -375,6 +341,134 @@ a:hover {
 
 .lastbar2 {
 	margin-top: 100px;
+}
+/* 랭킹 */
+.ranking {
+	margin: auto;
+	width: 1300px;
+	height: 851px;
+	background-color: #f3f4f8;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	transition-duration: 0.4s;
+}
+
+.rankingHeader {
+	padding-top: 22px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-top: 50px;
+	height: 241px;
+}
+
+.rankingHeaderTitle {
+	font-size: 25px;
+	font-weight: 700;
+	text-align: center;
+	font-family: 'BMEULJIRO';
+}
+
+.rankingHeaderCard {
+	height: 100%;
+	display: flex;
+	margin-top: 20px;
+	background-color: white;
+}
+
+.rankingMedal {
+	height: 148px;
+	width: 100px;
+	margin-left: 25px;
+	margin-right: 25px;
+	margin-bottom: 15px;
+}
+
+.rankingDetail {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 76%;
+	line-height: 40px;
+	text-align: center;
+}
+
+.rankingPointTitle {
+	font-size: 22px;
+	line-height: 40px;
+	color: #878787;
+	font-family: '양진체';
+}
+
+.rankingHeaderPoint {
+	font-size: 30px;
+	font-family: '양진체';
+}
+
+.rankingPointId {
+	margin-top: 8px;
+	display: inline-block;
+	color: #f5c023;
+	font-size: 24px;
+	border-radius: 13px;
+	padding: 1px 11px;
+}
+
+.rankingIdClick {
+	color: #999;
+}
+
+.rankingContent {
+	background: #fff;
+	padding: 0 30px;
+	border: 1px solid #f3f4f8;
+	height: 610px;
+	transition-duration: 0.4s;
+}
+
+.userRanking {
+	height: 100%;
+}
+
+.rankingAll {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e6e6e6;
+	display: flex;
+}
+
+.finalRankingAll {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: flex;
+}
+
+.rank {
+	font-size: 20px;
+	margin-left: 55px;
+	color: #999;
+	font-family: '양진체';
+	transition-duration: 0.4s;
+}
+
+.finalRank {
+	font-size: 20px;
+	margin-left: 45px;
+	color: #999;
+	font-family: '양진체';
+	transition-duration: 0.4s;
+}
+
+.rankingPoint {
+	font-size: 20px;
+	margin: auto;
+    padding-left: 70px;
+    margin-left: 460px;
+	font-family: 'BMEULJIRO';
+}
+
+.rankingName {
+	font-size: 13px;
+	margin: 4px 0px 0px 90px;
+	color: #999;
 }
 /* 스크롤업 fixed */
 .scrollUp {

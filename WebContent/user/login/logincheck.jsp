@@ -13,7 +13,7 @@
 		<c:when test="${loginResult == true }">
 			<script>
 				alert("관리자님 환영합니다.");
-				location.href = "../../admin/adminMyPage.jsp";
+				location.href = "${pageContext.request.contextPath}/admin/adminMyPage.jsp";
 			</script>
 		</c:when>
 		<c:otherwise>

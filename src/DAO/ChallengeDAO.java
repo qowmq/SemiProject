@@ -37,33 +37,33 @@ public class ChallengeDAO {
 
 	}
 
-//	public int insert(ChallengeDTO dto) throws SQLException, Exception {
-//		//seq, title, content, start_date, end_date, end, total_participate, file_path, 
-//		//giveortake, category, pp_point, total_amount, detailcontent
-//		String sql = "insert into challenge values(challenge_seq.nextval,?,?,?,sysdate+10,?,?,?,?,?,?,?,?);";
-//		try (Connection conn = getConnection();
-//				//PreparedStatement pstat = conn.prepareStatement(sql);
-//				PreparedStatement pstat = new LoggableStatement(conn, sql)) {
-//			pstat.setString(1, dto.getTitle());
-//			pstat.setString(2, dto.getContent());
-//			pstat.setString(3, dto.getStart_date());
-//			pstat.setString(4, dto.getEnd());
-//			pstat.setInt(5, dto.getTotal_participate());
-//			pstat.setString(6, dto.getFile_path());
-//			pstat.setString(7, dto.getGiveortake());
-//			pstat.setString(8, dto.getCategory());
-//			pstat.setInt(9, dto.getPp_point());
-//			pstat.setInt(10, dto.getTotal_amount());
-//			pstat.setString(11, dto.getDetailContent());
-//
-//			System.out.println(((LoggableStatement)pstat).getQueryString());
-//			int result = pstat.executeUpdate();
-//			conn.commit();
-//
-//			return result;
-//
-//		}
-//	}
+	//   public int insert(ChallengeDTO dto) throws SQLException, Exception {
+	//      //seq, title, content, start_date, end_date, end, total_participate, file_path, 
+	//      //giveortake, category, pp_point, total_amount, detailcontent
+	//      String sql = "insert into challenge values(challenge_seq.nextval,?,?,?,sysdate+10,?,?,?,?,?,?,?,?);";
+	//      try (Connection conn = getConnection();
+	//            //PreparedStatement pstat = conn.prepareStatement(sql);
+	//            PreparedStatement pstat = new LoggableStatement(conn, sql)) {
+	//         pstat.setString(1, dto.getTitle());
+	//         pstat.setString(2, dto.getContent());
+	//         pstat.setString(3, dto.getStart_date());
+	//         pstat.setString(4, dto.getEnd());
+	//         pstat.setInt(5, dto.getTotal_participate());
+	//         pstat.setString(6, dto.getFile_path());
+	//         pstat.setString(7, dto.getGiveortake());
+	//         pstat.setString(8, dto.getCategory());
+	//         pstat.setInt(9, dto.getPp_point());
+	//         pstat.setInt(10, dto.getTotal_amount());
+	//         pstat.setString(11, dto.getDetailContent());
+	//
+	//         System.out.println(((LoggableStatement)pstat).getQueryString());
+	//         int result = pstat.executeUpdate();
+	//         conn.commit();
+	//
+	//         return result;
+	//
+	//      }
+	//   }
 	public int update(ChallengeDTO dto,int seq) throws SQLException, Exception {
 		String sql = "update challenge set title=?,content=?,start_date=?,end_date=?,end=?,file_path=?,giveortake=?,category=? where seq=?";
 		try (Connection conn = getConnection(); PreparedStatement pstat = conn.prepareStatement(sql);) {
@@ -306,8 +306,9 @@ public class ChallengeDAO {
 					int pp_point = rs.getInt(11);
 					int total_amount = rs.getInt(12);
 					String detailContent = rs.getString("detailContent");
+					int exp = rs.getInt("exp");
 					ChallengeDTO dto = new ChallengeDTO(seq, title, content, start_date, end_date, end,
-							total_partcipate, file_path, giveortake, category, pp_point, total_amount, detailContent);
+							total_partcipate, file_path, giveortake, category, pp_point, total_amount, detailContent,exp);
 
 					result.add(dto);
 				}
@@ -339,8 +340,9 @@ public class ChallengeDAO {
 					int pp_point = rs.getInt(11);
 					int total_amount = rs.getInt(12);
 					String detailContent = rs.getString("detailContent");
+					int exp = rs.getInt("exp");
 					ChallengeDTO dto = new ChallengeDTO(seq, title, content, start_date, end_date, end,
-							total_partcipate, file_path, giveortake, category, pp_point, total_amount, detailContent);
+							total_partcipate, file_path, giveortake, category, pp_point, total_amount, detailContent,exp);
 
 					result.add(dto);
 				}
@@ -404,8 +406,8 @@ public class ChallengeDAO {
 					dto.setCategory(rs.getString("category"));
 					dto.setPp_point(rs.getInt("pp_point"));
 					list.add(dto);
-				}				
-				return list;				
+				}            
+				return list;            
 			}
 
 		}
@@ -435,6 +437,24 @@ public class ChallengeDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+		}
+	}
+
+	public int getExp (int seq) throws SQLException, Exception {
+		String sql="select exp from challenge where seq=?";
+		try(Connection conn = getConnection();
+				PreparedStatement pstat = conn.prepareStatement(sql);){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery()){
+				int exp=0;
+				if(rs.next()) {
+					exp = rs.getInt(1);
+				}
+
+				return exp;
+
+			}
+
 		}
 	}
 
@@ -494,10 +514,10 @@ public class ChallengeDAO {
 		int recordTotalCount = this.getArticleCount();
 
 		// 페이지 당 몇개의 게시글
-		//		 int recordCountPerPage = 10;
+		//       int recordCountPerPage = 10;
 
 		// 한 페이지에서 몇개의 네비게이터를 보여줄 지 설정
-		//		 int naviCountPerPage = 10;
+		//       int naviCountPerPage = 10;
 
 		// 총 몇 개의 페이지 인가
 		int pageTotalCount = 0;
@@ -566,10 +586,10 @@ public class ChallengeDAO {
 			recordTotalCount = this.getArticleCount(title2);
 		}
 		// 페이지 당 몇개의 게시글
-		//		 int recordCountPerPage = 10;
+		//       int recordCountPerPage = 10;
 
 		// 한 페이지에서 몇개의 네비게이터를 보여줄 지 설정
-		//		 int naviCountPerPage = 10;
+		//       int naviCountPerPage = 10;
 
 		// 총 몇 개의 페이지 인가
 		int pageTotalCount = 0;

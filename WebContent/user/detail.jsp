@@ -520,7 +520,7 @@ body {
 	<script>
     	$("#enjoybtn").on("click",function(){
     		if(${id != null}){
-    			location.href="terms.usboard?seq=${detailpage.seq }&id=${id }";
+    			location.href="${pageContext.request.contextPath }/terms.usboard?seq=${detailpage.seq }&id=${id }";
     		}else{
     			alert("로그인 페이지로 이동합니다");
     			location.href="${pageContext.request.contextPath }/user/login/login.jsp"

@@ -212,8 +212,13 @@ public class UserBoardServlet extends HttpServlet {
 			String userId = request.getParameter("userId");
 			int userPoint = Integer.parseInt(request.getParameter("userPoint"));
 			ChallengeDAO dao = ChallengeDAO.getInstance();
+			System.out.println("ChallengeDAO");
 			MemberDAO mdao = MemberDAO.getInstance();
+			System.out.println("MemberDAO");
+
 			ChallengeRecordDAO cdao = ChallengeRecordDAO.getInstance();
+			System.out.println("ChallengeRecordDAO");
+
 			try {
 				//챌린지 참여포인트증가
 				int result = dao.updateTotalAmount(userPoint, challengeSeq);
@@ -267,10 +272,15 @@ public class UserBoardServlet extends HttpServlet {
 
 				System.out.println(giveList);
 				System.out.println(takeList);
+				
+				
+				
+				
 
 				request.setAttribute("giveList", giveList);
 				request.setAttribute("takeList", takeList);
 				request.setAttribute("dto", dto);
+				System.out.println(dto.getExp());
 				request.setAttribute("clickPage", clickPage);
 
 				request.getRequestDispatcher("user/myPage/main.jsp").forward(request, response);

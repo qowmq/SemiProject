@@ -252,7 +252,7 @@
             if($("#check").prop("checked")){
             	if($("#pp-point").html() <= $("#userPoint").html()){
                     if(confirm("진행하시겠습니까?")){
-                        location.href="participation.usboard?seq=${challenge.seq }&pp_point=${challenge.pp_point }&userId=${userId.id }&userPoint=${userId.point}";
+                        location.href="${pageContext.request.contextPath}/participation.usboard?seq=${challenge.seq }&pp_point=${challenge.pp_point }&userId=${userId.id }&userPoint=${userId.point}";
                     }
             	}else{
             		alert("포인트를 충전해주십시오")

@@ -30,332 +30,345 @@ import adminboardCongiuration.Configuration;
 @WebServlet("*.adboard")
 public class AdminBoardServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String uri = request.getRequestURI();
-		String projectPath = request.getContextPath();
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      String uri = request.getRequestURI();
+      String projectPath = request.getContextPath();
 
-		String realPath = uri.substring(projectPath.length());
-		System.out.println("요청된 경로는 : " + realPath + "입니다.");
-		if (realPath.contentEquals("/detail.adboard")) {
-			int seq = Integer.parseInt(request.getParameter("seq"));
+      String realPath = uri.substring(projectPath.length());
+      System.out.println("요청된 경로는 : " + realPath + "입니다.");
+      if (realPath.contentEquals("/detail.adboard")) {
+         int seq = Integer.parseInt(request.getParameter("seq"));
 
-			ChallengeDTO dto = new ChallengeDTO();
+         ChallengeDTO dto = new ChallengeDTO();
 
-			try {
-				List<File_ListDTO> fileList= new ArrayList<>();
-				dto = ChallengeDAO.getInstance().getChallenge(seq);
+         try {
+            List<File_ListDTO> fileList= new ArrayList<>();
+            dto = ChallengeDAO.getInstance().getChallenge(seq);
 
-				fileList = FileListDAO.getInstance().selectAll();
-				ArrayList<Challenge_recordDTO> list = new ArrayList<>();
+            fileList = FileListDAO.getInstance().selectAll();
+            ArrayList<Challenge_recordDTO> list = new ArrayList<>();
 
-				list = ChallengeRecordDAO.getInstance().getParticipate(seq);
-				System.out.println("참여자 수 : "+list.size());
-				System.out.println("가져온 파일 수 : "+fileList.size());
+            list = ChallengeRecordDAO.getInstance().getParticipate(seq);
+            System.out.println("참여자 수 : "+list.size());
+            System.out.println("가져온 파일 수 : "+fileList.size());
 
-				request.setAttribute("fileList", fileList);
-				request.setAttribute("recordList", list);
-				request.setAttribute("dto", dto);
-				request.getRequestDispatcher("/admin/adminDetailView.jsp").forward(request, response);
+            request.setAttribute("fileList", fileList);
+            request.setAttribute("recordList", list);
+            request.setAttribute("dto", dto);
+            request.getRequestDispatcher("/admin/adminDetailView.jsp").forward(request, response);
 
-			} catch (Exception e) {
-				response.sendRedirect("error.jsp");
-				e.printStackTrace();
-			}
+         } catch (Exception e) {
+            response.sendRedirect("error.jsp");
+            e.printStackTrace();
+         }
 
-		}  else if (realPath.contentEquals("/succesCheck.adboard")) {
-			String[] check = request.getParameterValues("succesCheck");
-			int seq = Integer.parseInt(request.getParameter("seq"));
+      }   else if (realPath.contentEquals("/succesCheck.adboard")) {
+          String[] check = request.getParameterValues("succesCheck");
+          int seq = Integer.parseInt(request.getParameter("seq"));
 
-			System.out.println(seq);
-			for (int i = 0; i < check.length; i++) {
-				System.out.println(check[i]);
-			}
+          System.out.println(seq);
+          for (int i = 0; i < check.length; i++) {
+             System.out.println(check[i]);
+          }
 
-			ArrayList<Challenge_recordDTO> list = new ArrayList<>();
+          ArrayList<Challenge_recordDTO> list = new ArrayList<>();
 
-			try {
-				list = ChallengeRecordDAO.getInstance().getParticipate(2);
+          try {
+             list = ChallengeRecordDAO.getInstance().getParticipate(seq);
 
-				for (Challenge_recordDTO dto : list) {
-					for (int i = 0; i < check.length; i++) {
-						if (dto.getMember_id().contentEquals(check[i])) {
-							int result = ChallengeRecordDAO.getInstance().successUpdate(dto.getSeq());
-							System.out.println(result);
-						}
-					}
-				}
-			} catch (Exception e) {
-				response.sendRedirect("error.jsp");
-				e.printStackTrace();
-			}
-		} else if (realPath.contentEquals("/list.adboard")) {
-			int currentPage = 0;
-			String CPage = request.getParameter("currentPage");
-			System.out.println("cpage : " + CPage);
-			if (CPage == null) {
-				try {
-					currentPage = 1;
-					String page = ChallengeDAO.getInstance().getPageNavi(1);
-					int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1);
-					int end = currentPage * Configuration.recordCountPerPage;
+             for (Challenge_recordDTO dto : list) {
+                for (int i = 0; i < check.length; i++) {
+                   if (dto.getMember_id().contentEquals(check[i])) {
+                      int result = ChallengeRecordDAO.getInstance().successUpdate(dto.getSeq());
+                      int exp = ChallengeDAO.getInstance().getExp(seq);
+                      System.out.println(exp);
+                      int expresult = MemberDAO.getInstance().increaseExp(exp, check[i]);
+                      System.out.println(result);
+                      
+                      if(expresult>0) {
+                         System.out.println(check[i]+"경험치 증가!");
+                      }
+                   }
+                }
+             }
+             response.sendRedirect("list.adboard");
+          } catch (Exception e) {
+             response.sendRedirect("error.jsp");
+             e.printStackTrace();
+          }
+       }else if (realPath.contentEquals("/list.adboard")) {
+         int currentPage = 0;
+         String CPage = request.getParameter("currentPage");
+         System.out.println("cpage : " + CPage);
+         if (CPage == null) {
+            try {
+               currentPage = 1;
+               String page = ChallengeDAO.getInstance().getPageNavi(1);
+               int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1);
+               int end = currentPage * Configuration.recordCountPerPage;
 
-					System.out.println();
-					List<ChallengeDTO> dto = ChallengeDAO.getInstance().selectByPage(start, end);
+               System.out.println();
+               List<ChallengeDTO> dto = ChallengeDAO.getInstance().selectByPage(start, end);
 
-					System.out.println(dto.size());
+               System.out.println(dto.size());
 
-					request.setAttribute("page", page);
-					request.setAttribute("dto", dto);
-					request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
+               request.setAttribute("page", page);
+               request.setAttribute("dto", dto);
+               request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
 
-				} catch (Exception e) {
-					response.sendRedirect("error.jsp");
-					e.printStackTrace();
-				}
-			} else {
-				try {
-					currentPage = Integer.parseInt(CPage);
-					String page = ChallengeDAO.getInstance().getPageNavi(currentPage);
+            } catch (Exception e) {
+               response.sendRedirect("error.jsp");
+               e.printStackTrace();
+            }
+         } else {
+            try {
+               currentPage = Integer.parseInt(CPage);
+               String page = ChallengeDAO.getInstance().getPageNavi(currentPage);
 
-					int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1);
-					int end = currentPage * Configuration.recordCountPerPage;
-					List<ChallengeDTO> dto = ChallengeDAO.getInstance().selectByPage(start, end);
-					request.setAttribute("page", page);
-					request.setAttribute("dto", dto);
-					request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
-				} catch (Exception e) {
-					response.sendRedirect("error.jsp");
-					e.printStackTrace();
-				}
-			}
-		} else if (realPath.contentEquals("/write.adboard")) {
-	         String uploadPath = request.getServletContext().getRealPath("/files");
-	         File uploadFilePath = new File(uploadPath);
-	         System.out.println(uploadPath);
-	         System.out.println(uploadFilePath);
-	         if (!uploadFilePath.exists()) {
-	            uploadFilePath.mkdir();
+               int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1);
+               int end = currentPage * Configuration.recordCountPerPage;
+               List<ChallengeDTO> dto = ChallengeDAO.getInstance().selectByPage(start, end);
+               request.setAttribute("page", page);
+               request.setAttribute("dto", dto);
+               request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
+            } catch (Exception e) {
+               response.sendRedirect("error.jsp");
+               e.printStackTrace();
+            }
+         }
+      } else if (realPath.contentEquals("/write.adboard")) {
+            String uploadPath = request.getServletContext().getRealPath("/files");
+            File uploadFilePath = new File(uploadPath);
+            System.out.println(uploadPath);
+            System.out.println(uploadFilePath);
+            if (!uploadFilePath.exists()) {
+               uploadFilePath.mkdir();
 
-	         }
-	         try {
-	            int maxSize = 1024 * 1024 * 10; // 10mb 까지 용량제한
+            }
+            try {
+               int maxSize = 1024 * 1024 * 10; // 10mb 까지 용량제한
 
-	            MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8",
-	                  new DefaultFileRenamePolicy());
+               MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8",
+                     new DefaultFileRenamePolicy());
 
-	            // String name = multi.getParameter("file1");//파일 가져와라
-	            String fileName = multi.getFilesystemName("file1"); // 업로드되는 파일의 이름이 뭐냐
-	            String oriFileName = multi.getOriginalFileName("file1"); // 업로드 할 때 당시의 파일의 원래 이름이 뭐냐
-	            List<ChallengeDTO> list = ChallengeDAO.getInstance().getInstance().selectAll();
-	            // FilesDTO dto2 = new
-	            // FilesDTO(0,list.get(list.size()-1).getSeq()+1,fileName,oriFileName);
-	            // int result2 = FilesDAO.getInstance().insert(dto2);
+               // String name = multi.getParameter("file1");//파일 가져와라
+               String fileName = multi.getFilesystemName("file1"); // 업로드되는 파일의 이름이 뭐냐
+               String oriFileName = multi.getOriginalFileName("file1"); // 업로드 할 때 당시의 파일의 원래 이름이 뭐냐
+               List<ChallengeDTO> list = ChallengeDAO.getInstance().getInstance().selectAll();
+               // FilesDTO dto2 = new
+               // FilesDTO(0,list.get(list.size()-1).getSeq()+1,fileName,oriFileName);
+               // int result2 = FilesDAO.getInstance().insert(dto2);
 
-	            // seq
-	            String title = multi.getParameter("title");
-	          
-	            String contents = "인증가능요일:월-일,인증빈도:매일,인증가능시간:24시간,하루인증횟수:1번";
-	            String detailContent = multi.getParameter("detailContent");
-	         
-	            // String writer = (String)request.getSession().getAttribute("loginInfo");
-	            String start_date = multi.getParameter("startdate"); //2019-12-04
-	            Calendar cal = Calendar.getInstance();   
-	            SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-	            Date toDate = transFormat.parse(start_date);
-	            cal.setTime(toDate);
-	            cal.add(Calendar.DATE, 10);
-	            System.out.println(cal.getTime());
-	            String transeDate=transFormat.format(cal.getTime());
-	            System.out.println(transeDate);
+               // seq
+               String title = multi.getParameter("title");
+             
+               String contents = "인증가능요일:월-일,인증빈도:매일,인증가능시간:24시간,하루인증횟수:1번";
+               String detailContent = multi.getParameter("detailContent");
+            
+               // String writer = (String)request.getSession().getAttribute("loginInfo");
+               String start_date = multi.getParameter("startdate"); //2019-12-04
+               Calendar cal = Calendar.getInstance();   
+               SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+               Date toDate = transFormat.parse(start_date);
+               cal.setTime(toDate);
+               cal.add(Calendar.DATE, 10);
+               System.out.println(cal.getTime());
+               String transeDate=transFormat.format(cal.getTime());
+               System.out.println(transeDate);
 
-	            
+               
 
-	            String end_date = multi.getParameter("enddate");
-	            String giveortake = multi.getParameter("giveortake");
-	            String category = multi.getParameter("category");
+               String end_date = multi.getParameter("enddate");
+               String giveortake = multi.getParameter("giveortake");
+               String category = multi.getParameter("category");
+               int exp = Integer.parseInt(multi.getParameter("exp"));
 
-	            System.out.println(title);
-	            System.out.println(contents);
+               System.out.println(title);
+               System.out.println(contents);
 
-	            ChallengeDTO dto = new ChallengeDTO(0, title, contents, start_date, end_date, "N", 0, oriFileName,
-	                  giveortake, category, 10000, 0, detailContent);
+               ChallengeDTO dto = new ChallengeDTO(0, title, contents, start_date, end_date, "N", 0, oriFileName,
+                     giveortake, category, 10000, 0, detailContent,exp);
 
-	               int result = ChallengeDAO.getInstance().insertWrite(dto);
-	               System.out.println(result);
+                  int result = ChallengeDAO.getInstance().insertWrite(dto);
+                  System.out.println(result);
 
-	               response.sendRedirect("list.adboard");
-	         } catch (Exception e) {
-	            e.printStackTrace();
-	            response.sendRedirect("error.jsp");
-	         }
+                  response.sendRedirect("list.adboard");
+            } catch (Exception e) {
+               e.printStackTrace();
+               response.sendRedirect("error.jsp");
+            }
 
-	      }else if (realPath.contentEquals("/memberlist.adboard")) {
+         }else if (realPath.contentEquals("/memberlist.adboard")) {
 
-			String id = request.getParameter("id");
+         String id = request.getParameter("id");
 
-			System.out.println("넘어온 아이디 값은 : " + id);
-			MemberDTO dto = new MemberDTO();
-			List<ChallengeDTO> list = new ArrayList<>();
-			try {
-				dto = MemberDAO.getInstance().select(id);
-				list = ChallengeDAO.getInstance().detailChallengeList(id); //참여한 챌린지의 seq얻음
+         System.out.println("넘어온 아이디 값은 : " + id);
+         MemberDTO dto = new MemberDTO();
+         List<ChallengeDTO> list = new ArrayList<>();
+         try {
+            dto = MemberDAO.getInstance().select(id);
+            list = ChallengeDAO.getInstance().detailChallengeList(id); //참여한 챌린지의 seq얻음
 
-				request.setAttribute("list", list);
-				request.setAttribute("dto", dto);
+            request.setAttribute("list", list);
+            request.setAttribute("dto", dto);
 
-				request.getRequestDispatcher("/admin/detailmemberlist.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/detailmemberlist.jsp").forward(request, response);
 
-			} catch (Exception e) {
-				response.sendRedirect("error.jsp");
-				e.printStackTrace();
-			}
-		}
-		else if(realPath.contentEquals("/searchList.adboard")) {
-			request.setCharacterEncoding("utf8");
-			String search = request.getParameter("search");
-			String oldsearch = "%"+search+"%";
-			System.out.println(oldsearch);
+         } catch (Exception e) {
+            response.sendRedirect("error.jsp");
+            e.printStackTrace();
+         }
+      }
+      else if(realPath.contentEquals("/searchList.adboard")) {
+         request.setCharacterEncoding("utf8");
+         String search = request.getParameter("search");
+         String oldsearch = "%"+search+"%";
+         System.out.println(oldsearch);
 
-			int currentPage = 0;
-			String CPage = request.getParameter("currentPage");
-			System.out.println("cpage : " + CPage);
-			if (CPage == null) {
-				try {
-					currentPage = 1;
-					String page = ChallengeDAO.getInstance().getPageNavi2(1,search);
-					int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1);
-					int end = currentPage * Configuration.recordCountPerPage;
+         int currentPage = 0;
+         String CPage = request.getParameter("currentPage");
+         System.out.println("cpage : " + CPage);
+         if (CPage == null) {
+            try {
+               currentPage = 1;
+               String page = ChallengeDAO.getInstance().getPageNavi2(1,search);
+               int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1);
+               int end = currentPage * Configuration.recordCountPerPage;
 
-					System.out.println();
-					List<ChallengeDTO> dto = ChallengeDAO.getInstance().selectByPagesearch(start, end, oldsearch);
+               System.out.println();
+               List<ChallengeDTO> dto = ChallengeDAO.getInstance().selectByPagesearch(start, end, oldsearch);
 
-					System.out.println(dto.size());
+               System.out.println(dto.size());
 
-					request.setAttribute("page", page);
-					request.setAttribute("dto", dto);
-					request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
+               request.setAttribute("page", page);
+               request.setAttribute("dto", dto);
+               request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
 
-				}catch(Exception e) {
-					response.sendRedirect("error.jsp");
-					e.printStackTrace();
-				}
-			}
-			else {
-				try {
-					currentPage = Integer.parseInt(CPage);
-					String page = ChallengeDAO.getInstance().getPageNavi2(currentPage,search);
+            }catch(Exception e) {
+               response.sendRedirect("error.jsp");
+               e.printStackTrace();
+            }
+         }
+         else {
+            try {
+               currentPage = Integer.parseInt(CPage);
+               String page = ChallengeDAO.getInstance().getPageNavi2(currentPage,search);
 
-					int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage-1); 
-					int end = currentPage * Configuration.recordCountPerPage;
-					List<ChallengeDTO> dto =  ChallengeDAO.getInstance().selectByPagesearch(start, end,oldsearch);
-					request.setAttribute("page", page);
-					request.setAttribute("dto", dto);
-					request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
-				}catch(Exception e) {
-					e.printStackTrace();
-					response.sendRedirect("error.jsp");
-				}
-			}
-		}
-		else if(realPath.contentEquals("/modify.adboard")) {
-			try {
-				int seq = Integer.parseInt(request.getParameter("seq"));
-				ChallengeDTO dto = ChallengeDAO.getInstance().getChallenge(seq);
-				List<Challenge_recordDTO> list = ChallengeRecordDAO.getInstance().selectAll(seq);
-				System.out.println(dto.getTitle());
-				request.setAttribute("challenge", dto);
-				request.setAttribute("record", list);
-				request.getRequestDispatcher("admin/DetailManage.jsp").forward(request, response);
-			}catch(Exception e) {
-				e.printStackTrace();
-				response.sendRedirect("error.jsp");
-			}
-		}else if(realPath.contentEquals("/delete.adboard")) {
-			String seq = request.getParameter("seq");
+               int start = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage-1); 
+               int end = currentPage * Configuration.recordCountPerPage;
+               List<ChallengeDTO> dto =  ChallengeDAO.getInstance().selectByPagesearch(start, end,oldsearch);
+               request.setAttribute("page", page);
+               request.setAttribute("dto", dto);
+               request.getRequestDispatcher("admin/adminChallengeList.jsp").forward(request, response);
+            }catch(Exception e) {
+               e.printStackTrace();
+               response.sendRedirect("error.jsp");
+            }
+         }
+      }
+      else if(realPath.contentEquals("/modify.adboard")) {
+         try {
+            int seq = Integer.parseInt(request.getParameter("seq"));
+            ChallengeDTO dto = ChallengeDAO.getInstance().getChallenge(seq);
+            List<Challenge_recordDTO> list = ChallengeRecordDAO.getInstance().selectAll(seq);
+            System.out.println(dto.getTitle());
+            request.setAttribute("challenge", dto);
+            request.setAttribute("record", list);
+            request.getRequestDispatcher("admin/DetailManage.jsp").forward(request, response);
+         }catch(Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("error.jsp");
+         }
+      }else if(realPath.contentEquals("/delete.adboard")) {
+         String seq = request.getParameter("seq");
 
-			System.out.println(seq);
-			int seq2 = Integer.parseInt(seq);
-			try {
-				int cresult = ChallengeDAO.getInstance().delete(seq2);
+         System.out.println(seq);
+         int seq2 = Integer.parseInt(seq);
+         try {
+            int cresult = ChallengeDAO.getInstance().delete(seq2);
 
-				int rresult = ChallengeRecordDAO.getInstance().deleteByChall(seq2);
+            int rresult = ChallengeRecordDAO.getInstance().deleteByChall(seq2);
 
-				response.sendRedirect("list.adboard");
-			}catch(Exception e) {
-				e.printStackTrace();
-				response.sendRedirect("error.jsp");
+            response.sendRedirect("list.adboard");
+         }catch(Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("error.jsp");
 
-			}
-		}else if(realPath.contentEquals("/update.adboard")) {
-	         int seq = Integer.parseInt(request.getParameter("seq"));
-	         String uploadPath = request.getServletContext().getRealPath("/files");
-	         File uploadFilePath = new File(uploadPath);
-	         System.out.println(uploadPath);
-	         System.out.println(uploadFilePath);
-	         if (!uploadFilePath.exists()) {
-	            uploadFilePath.mkdir();
+         }
+      }else if(realPath.contentEquals("/update.adboard")) {
+            int seq = Integer.parseInt(request.getParameter("seq"));
+            String uploadPath = request.getServletContext().getRealPath("/files");
+            File uploadFilePath = new File(uploadPath);
+            System.out.println(uploadPath);
+            System.out.println(uploadFilePath);
+            if (!uploadFilePath.exists()) {
+               uploadFilePath.mkdir();
 
-	         }
-	         try {
-	            int maxSize = 1024 * 1024 * 10; // 10mb 까지 용량제한
+            }
+            try {
+               int maxSize = 1024 * 1024 * 10; // 10mb 까지 용량제한
 
-	            MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8",
-	                  new DefaultFileRenamePolicy());
+               MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8",
+                     new DefaultFileRenamePolicy());
 
-	            // String name = multi.getParameter("file1");//파일 가져와라
-	            String fileName = multi.getFilesystemName("file1"); // 업로드되는 파일의 이름이 뭐냐
-	            String oriFileName = multi.getOriginalFileName("file1"); // 업로드 할 때 당시의 파일의 원래 이름이 뭐냐
-	            List<ChallengeDTO> list = ChallengeDAO.getInstance().selectAll();
-	            // FilesDTO dto2 = new
-	            // FilesDTO(0,list.get(list.size()-1).getSeq()+1,fileName,oriFileName);
-	            // int result2 = FilesDAO.getInstance().insert(dto2);
+               // String name = multi.getParameter("file1");//파일 가져와라
+               String fileName = multi.getFilesystemName("file1"); // 업로드되는 파일의 이름이 뭐냐
+               String oriFileName = multi.getOriginalFileName("file1"); // 업로드 할 때 당시의 파일의 원래 이름이 뭐냐
+               List<ChallengeDTO> list = ChallengeDAO.getInstance().selectAll();
+               // FilesDTO dto2 = new
+               // FilesDTO(0,list.get(list.size()-1).getSeq()+1,fileName,oriFileName);
+               // int result2 = FilesDAO.getInstance().insert(dto2);
 
-	            // seq
-	            String title = multi.getParameter("title");
-	            String contents = "인증가능요일:월-일,인증빈도:매일,인증가능시간:24시간,하루인증횟수:1번";
-	            String detailContent = multi.getParameter("content");
-	            // String writer = (String)request.getSession().getAttribute("loginInfo");
-	            String start_date = multi.getParameter("startdate");
-	            String end_date = multi.getParameter("enddate");
-	            String end = multi.getParameter("end");
-	            String giveortake = multi.getParameter("giveortake");
-	            String category = multi.getParameter("category");
+               // seq
+               String title = multi.getParameter("title");
+               String contents = "인증가능요일:월-일,인증빈도:매일,인증가능시간:24시간,하루인증횟수:1번";
+               String detailContent = multi.getParameter("content");
+               // String writer = (String)request.getSession().getAttribute("loginInfo");
+               String start_date = multi.getParameter("startdate");
+               String end_date = multi.getParameter("enddate");
+               String end = multi.getParameter("end");
+               String giveortake = multi.getParameter("giveortake");
+               String category = multi.getParameter("category");
 
-	            System.out.println(start_date);
-	            System.out.println(end_date);
-	            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	            SimpleDateFormat mat = new SimpleDateFormat("yyyy-MM-dd");
+               int exp = Integer.parseInt(multi.getParameter("exp"));
+               
+               System.out.println(start_date);
+               System.out.println(end_date);
+               SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+               SimpleDateFormat mat = new SimpleDateFormat("yyyy-MM-dd");
 
-	            String startdt = mat.format(format.parse(start_date));
-	            String enddt = mat.format(format.parse(end_date));
+               String startdt = mat.format(format.parse(start_date));
+               String enddt = mat.format(format.parse(end_date));
+               
+              
+               
+               System.out.println(title);
+               System.out.println(contents);
+               System.out.println(startdt);
+               System.out.println(enddt);
+               ChallengeDTO dto = new ChallengeDTO(0,title,contents,startdt,enddt,end,0,oriFileName,giveortake,category,10000,0,detailContent,exp);
 
-	            System.out.println(title);
-	            System.out.println(contents);
-	            System.out.println(startdt);
-	            System.out.println(enddt);
-	            ChallengeDTO dto = new ChallengeDTO(0,title,contents,startdt,enddt,end,0,oriFileName,giveortake,category,10000,0,detailContent);
+               try {
+                  int result = ChallengeDAO.getInstance().update(dto, seq);
 
-	            try {
-	               int result = ChallengeDAO.getInstance().update(dto, seq);
+                  System.out.println(result);
 
-	               System.out.println(result);
+                  response.sendRedirect("list.adboard");
+               } catch (Exception e) {
+                  e.printStackTrace();
+               }
+            } catch (Exception e) {
+               e.printStackTrace();
+               response.sendRedirect("error.jsp");
+            }
+         }
+   }
 
-	               response.sendRedirect("list.adboard");
-	            } catch (Exception e) {
-	               e.printStackTrace();
-	            }
-	         } catch (Exception e) {
-	            e.printStackTrace();
-	            response.sendRedirect("error.jsp");
-	         }
-	      }
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

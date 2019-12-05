@@ -400,7 +400,7 @@ tr {
 	<script>
 		$("#id").on("focusout", function() {
 			var id = $("#id").val();
-			var regex = /^[a-z0-9]{3,}$/;
+			var regex = /^[a-z0-9]{4,15}$/;
 			var result = regex.exec(id);
 			if (result != null) {
 				$("#idresult").html("✔");
@@ -437,7 +437,7 @@ tr {
 		})
 
 		$("#pw1").on("focusout", function() {
-			var regex = /^[A-Za-z0-9]{8,}$/;
+			var regex = /^[A-Za-z0-9]{8,12}$/;
 			var data = $("#pw1").val();
 			var result = regex.exec(data);
 			if (result != null) {
@@ -501,7 +501,7 @@ tr {
 		})
 
 		$("#email").on("focusout", function() {
-			var regex = /^[a-z0-9]*@[a-z]{3,}\.[a-z]{2,4}$/;
+			var regex = /([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,2}/;
 			var data = $("#email").val();
 			var result = regex.exec(data);
 			if (result != null) {

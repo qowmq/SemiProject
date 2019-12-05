@@ -131,6 +131,21 @@ public class PayMentServelt extends HttpServlet {
 				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
+		}else if(URL.equals("/refundsCheck.pay")) {
+			try {
+				//아이디 불러옴
+				String id = (String) request.getSession().getAttribute("id");
+				int inputPoint = Integer.parseInt(request.getParameter("inputPoint"));
+
+				int result = MemberDAO.getInstance().pointByrefunds(id, inputPoint);
+				if(result > -1) {
+					request.setAttribute("result", result);
+					request.getRequestDispatcher("/user/pay/close.jsp").forward(request, response);
+				}
+			}catch (Exception e) {
+				response.sendRedirect("error.jsp");
+				e.printStackTrace();
+			}
 		}
 	}
 

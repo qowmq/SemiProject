@@ -49,8 +49,8 @@
 			브라우저에서 자바스크립트를 활성화하는 방법</a>을 참고 하세요.
 	</div>
 </noscript>
-<body onresize="parent.resizeTo(540,600)"
-	onload="parent.resizeTo(540,600)">
+<body onresize="parent.resizeTo(800,600)"
+	onload="parent.resizeTo(800,600)">
 	<c:choose>
 		<c:when test="${dto ne null}">
 			<div class="pagecontainer">

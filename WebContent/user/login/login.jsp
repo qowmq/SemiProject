@@ -29,215 +29,7 @@
    href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap"
    rel="stylesheet">
 <style>
-@font-face {
-   font-family: '양진체';
-   src:
-      url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
-}
-
-body {
-   margin: 0px;
-   padding: 0px;
-   background-color: #FFFFFF;
-}
-
-.lastbar {
-   margin: 0px;
-   overflow: hidden;
-   padding: 0px;
-}
-
-.navi {
-   position: fixed;
-   top: 0px;
-   margin: 0px;
-   overflow: hidden;
-   padding: 0px;
-   width: 900px;
-   left: 26.4%;
-   border-bottom: 3px solid black;
-   font-family: fantasy;
-   font-size: 20px;
-}
-
-.title {
-   margin: 0px;
-   padding: 0px;
-   width: 50%;
-}
-
-.itemList {
-   position: absolute;
-   margin: 0px;
-   padding: 0px;
-   right: 0px;
-   width: 50%;
-}
-
-.navi-title {
-   list-style-type: none;
-   width: 50%;
-   line-height: 72px;
-   float: left;
-   text-align: center;
-   color: #1D1F21;
-}
-
-.navi-item {
-   position: absolute;
-   right: 0px;
-   list-style-type: none;
-   width: 50%;
-   line-height: 72px;
-   float: left;
-   text-align: center;
-   color: #1D1F21;
-}
-
-.navi-item2 {
-   list-style-type: none;
-   width: 25%;
-   line-height: 30px;
-   float: left;
-   text-align: center;
-   color: #1D1F21;
-}
-
-.navi-item3 {
-   list-style-type: none;
-   width: 25%;
-   line-height: 72px;
-   float: left;
-   text-align: center;
-   color: #1D1F21;
-}
-
-.navi-item>a {
-   text-decoration: none;
-   color: #1D1F21;
-   width: 100%;
-   height: 100%;
-   display: block;
-}
-
-.navi-item2>a {
-   text-decoration: none;
-   color: #1D1F21;
-   width: 100%;
-   height: 100%;
-   display: block;
-}
-
-.navi-item3>a {
-   text-decoration: none;
-   color: #1D1F21;
-   width: 100%;
-   height: 100%;
-   display: block;
-   font-weight: bold;
-}
-
-.navi-title>a {
-   text-decoration: none;
-   color: #1D1F21;
-   width: 100%;
-   height: 100%;
-   display: block;
-}
-
-.navi-item>a:hover {
-   background-color: orange;
-}
-
-.onefloor {
-   border-top: 3px solid #1D1F21;
-   border-radius: 3px;
-}
-
-.twofloor {
-   border-bottom: 3px solid #1D1F21;
-   border-radius: 3px;
-}
-
-.threefloor {
-   border-bottom: 3px solid #1D1F21;
-   border-radius: 3px;
-   height: 50px;
-}
-
-.fivefloor {
-   width: 100%;
-   background-color: #FFFFFF;
-}
-
-.progress {
-   display: inline-block;
-   width: 90%;
-   height: 10%;
-}
-
-.submenu {
-   font-family: 'Calistoga', cursive;
-   color: #7019FF;
-}
-
-.sidebar {
-   height: 51px;
-   font-family: 'Calistoga', cursive;
-   text-align: center;
-}
-
-.sidebar>a {
-   height: 100%;
-   color: #FFFFFF;
-}
-
-.fourthfloor {
-   height: 700px;
-}
-
-table {
-   width: 300px;
-   height: 200px;
-   position: relative;
-   margin: auto;
-   text-align: center;
-   top: 0px;
-}
-
-.bottom {
-   border: 1px solid black;
-   height: 300px;
-}
-
-th {
-   font-size: 25px;
-}
-
-#check {
-   border-bottom: 1px solid black;
-}
-
-#login {
-   background-color: white;
-   border: 1px solid black;
-}
-
-#signupbtn {
-   background-color: white;
-   border: 1px solid black;
-}
-
-.container {
-   padding: 0px;
-}
-
-.signin-content {
-   padding-top: 200px;
-}
+@font-face{font-family:'양진체';src:url(https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff) format('woff');font-weight:400;font-style:normal}body{margin:0;padding:0;background-color:#fff}.lastbar{margin:0;overflow:hidden;padding:0}.navi{position:fixed;top:0;margin:0;overflow:hidden;padding:0;width:900px;left:26.4%;border-bottom:3px solid #000;font-family:fantasy;font-size:20px}.title{margin:0;padding:0;width:50%}.itemList{position:absolute;margin:0;padding:0;right:0;width:50%}.navi-title{list-style-type:none;width:50%;line-height:72px;float:left;text-align:center;color:#1d1f21}.navi-item{position:absolute;right:0;list-style-type:none;width:50%;line-height:72px;float:left;text-align:center;color:#1d1f21}.navi-item2{list-style-type:none;width:25%;line-height:30px;float:left;text-align:center;color:#1d1f21}.navi-item3{list-style-type:none;width:25%;line-height:72px;float:left;text-align:center;color:#1d1f21}.navi-item>a{text-decoration:none;color:#1d1f21;width:100%;height:100%;display:block}.navi-item2>a{text-decoration:none;color:#1d1f21;width:100%;height:100%;display:block}.navi-item3>a{text-decoration:none;color:#1d1f21;width:100%;height:100%;display:block;font-weight:700}.navi-title>a{text-decoration:none;color:#1d1f21;width:100%;height:100%;display:block}.navi-item>a:hover{background-color:orange}.onefloor{border-top:3px solid #1d1f21;border-radius:3px}.twofloor{border-bottom:3px solid #1d1f21;border-radius:3px}.threefloor{border-bottom:3px solid #1d1f21;border-radius:3px;height:50px}.fivefloor{width:100%;background-color:#fff}.progress{display:inline-block;width:90%;height:10%}.submenu{font-family:Calistoga,cursive;color:#7019ff}.sidebar{height:51px;font-family:Calistoga,cursive;text-align:center}.sidebar>a{height:100%;color:#fff}.fourthfloor{height:700px}table{width:300px;height:200px;position:relative;margin:auto;text-align:center;top:0}.bottom{border:1px solid #000;height:300px}th{font-size:25px}#check{border-bottom:1px solid #000}#login{background-color:#fff;border:1px solid #000}#signupbtn{background-color:#fff;border:1px solid #000}.container{padding:0}.signin-content{padding-top:200px}
 </style>
 </head>
 <body>
@@ -255,7 +47,7 @@ th {
             request.getSession().setAttribute("uri", uri);
          %>
 
-         <form action="login.mem" method="post" id="loginfrm">
+         <form action="${pageContext.request.contextPath}/login.mem" method="post" id="loginfrm">
             <section class="sign-in">
                <div class="container">
                   <div class="signin-content">
@@ -283,9 +75,9 @@ th {
                               class="form-submit" value="Log in" />
                               <div class="signUp"
                            style="margin: auto; padding: 20px 0px 0px 0px; color: gray; opacity:0.5; font-size:2px;">
-                           <a href="signup.jsp">회원가입</a>
-                           │<a href="findId.jsp">아이디</a>
-                           │<a href="findPw.jsp">비밀번호찾기</a>
+                           <a href="${pageContext.request.contextPath}/user/login/signup.jsp">회원가입</a>
+                           │<a href="${pageContext.request.contextPath}/user/login/findId.jsp">아이디</a>
+                           │<a href="${pageContext.request.contextPath}/user/login/findPw.jsp">비밀번호찾기</a>
                         </div> 
                         </div>         
                         <input type="hidden" name="page" value="${clickPage}">               

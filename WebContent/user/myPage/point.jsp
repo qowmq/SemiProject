@@ -19,6 +19,11 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Calistoga&display=swap"
 	rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bangers|Coming+Soon|Gloria+Hallelujah|Handlee|Rock+Salt&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: '양진체'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'BMEULJIRO'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff'); font-weight: normal; font-style: normal; }
+</style>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -60,8 +65,8 @@ body {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
-	width: 60%;
-	left: 20%;
+	width: 55%;
+	left: 22%;
 	background-color: #fffFFF90;
 	font-size: 20px
 }
@@ -76,7 +81,7 @@ body {
 	position: absolute;
 	margin: 0;
 	padding: 0;
-	right: 0;
+	right: -250px;
 	width: 50%
 }
 
@@ -149,9 +154,7 @@ body {
 	display: block
 }
 
-.navi-item>a:hover {
-	background-color: orange
-}
+
 
 .container {
 	background-color: #FFFFFF;
@@ -197,7 +200,7 @@ body {
 	width: 12%;
 	height: 350px;
 	border: 3px solid #1d1f21;
-	border-radius: 6px;
+	border-radius: 30px;
 }
 
 .submenu {
@@ -244,27 +247,19 @@ body {
 </style>
 <script>
 	$(function() {
-		$("#pointCharge").on(
-				"click",
-				function() {
-					window.open("charge.pay", "",
-							"width=510, height=800, left=200, menubar=no");
-				})
+	$("#pointCharge").on("click",function(){window.open("charge.pay", "",
+		"width=510, height=800, left=200, menubar=no");
+	})
 
-		$("#pointRefunds")
-				.on(
-						"click",
-						function() {
-							window
-									.open("refunds.pay", "",
-											'minimizable=no,scrollbars=no,resizable=no,titlebar=no,location=no');
-						})
+		$("#pointRefunds").on("click",function() {
+			window.open("refunds.pay", "",
+				"minimizable=no,scrollbars=no,resizable=no,titlebar=no,location=no");
+			})
 	})
 
 	function buyCancel(seq) {
-		window
-				.open("payCancel.pay?seq=" + seq, "",
-						'minimizable=no,scrollbars=no,resizable=no,titlebar=no,location=no');
+		window.open("payCancel.pay?seq=" + seq, "",
+			"minimizable=no,scrollbars=no,resizable=no,titlebar=no,location=no");
 	}
 </script>
 </head>
