@@ -39,44 +39,7 @@ public class UserBoardServlet extends HttpServlet {
 		String projectPath = request.getContextPath();
 		String realPath = uri.substring(projectPath.length());
 		System.out.println(realPath);
-		if (realPath.contentEquals("/banner.usboard")) {
-			String id = (String) request.getSession().getAttribute("id");
-			try {
-				ArrayList<ChallengeDTO> list = new ArrayList<>();
-				list = ChallengeDAO.getInstance().selectIdChallenge(id);
-				ArrayList<ChallengeDTO> giveList = new ArrayList<>();
-				ArrayList<ChallengeDTO> takeList = new ArrayList<>();
-				System.out.println(id);
-				MemberDTO dto = MemberDAO.getInstance().select(id);
-				if (list.size() == 0) {
-					giveList = null;
-					takeList = null;
-				} else {
-					for (int i = 0; i < list.size(); i++) {
-						if (list.get(i).getGiveortake().equals("give")) {
-							giveList.add(list.get(i));
-						} else {
-							takeList.add(list.get(i));
-						}
-
-					}
-				}
-
-				System.out.println(giveList);
-				System.out.println(takeList);
-
-				request.setAttribute("giveList", giveList);
-				request.setAttribute("takeList", takeList);
-				request.setAttribute("dto", dto);
-
-				request.getRequestDispatcher("user/myPage/main.jsp").forward(request, response);
-			} catch (Exception e) {
-				System.out.println("오류 났어요!!! 오류 확인해주세요!!");
-				e.printStackTrace();
-
-			}
-
-		} else if (realPath.contentEquals("/fromList.usboard")) {
+		if (realPath.contentEquals("/fromList.usboard")) {
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			ChallengeDTO detail = new ChallengeDTO();
 			try {
@@ -101,17 +64,17 @@ public class UserBoardServlet extends HttpServlet {
 				request.setAttribute("frequency", frequency);
 				request.setAttribute("time", time);
 				request.setAttribute("number", number);
-				
+
 				//참가여부 파악
 				String id = (String) request.getSession().getAttribute("id");
 				boolean idCompare = ChallengeRecordDAO.getInstance().idCompare(id, seq);
-				
+
 				request.setAttribute("idCompare", idCompare);
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("user/detail.jsp");
 				rd.forward(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -125,7 +88,7 @@ public class UserBoardServlet extends HttpServlet {
 			String id = (String) request.getSession().getAttribute("id");
 			try {
 
-				int recordNum = ChallengeRecordDAO.getInstance().selectSeq(16, id);
+				int recordNum = ChallengeRecordDAO.getInstance().selectSeq(challengeNum, id);
 
 				// System.out.println(challengeNum + ":::::::::::::::" + recordNum);
 				System.out.println("레코드 넘버 !! ::: " + recordNum);
@@ -205,7 +168,7 @@ public class UserBoardServlet extends HttpServlet {
 				}
 
 			} catch (Exception e) {
-				System.out.println("오류났어요!!오류오류");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -240,6 +203,7 @@ public class UserBoardServlet extends HttpServlet {
 				}
 
 			} catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 		}else if(realPath.contentEquals("/participation.usboard")) {
@@ -265,20 +229,61 @@ public class UserBoardServlet extends HttpServlet {
 				System.out.println(result4);
 				response.sendRedirect("fromList.usboard?seq="+challengeSeq);
 			} catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
-			
-			
-			
-			
-		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+			///////////////////////////////////////////////////////////////////////////////////////////////////////
 			//마이페이지
-			
-			
+
+		}else if (realPath.contentEquals("/banner.usboard")) {
+			String id = (String) request.getSession().getAttribute("id");
+			String clickPage = request.getParameter("page");
+			System.out.println(clickPage);
+			request.getSession().setAttribute("clcikPage", clickPage);
+			try {
+				ArrayList<ChallengeDTO> list = new ArrayList<>();
+				list = ChallengeDAO.getInstance().selectIdChallenge(id);
+				ArrayList<ChallengeDTO> giveList = new ArrayList<>();
+				ArrayList<ChallengeDTO> takeList = new ArrayList<>();
+				System.out.println(id);
+				MemberDTO dto = MemberDAO.getInstance().select(id);
+				if (list.size() == 0) {
+					giveList = null;
+					takeList = null;
+				} else {
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getGiveortake().equals("give")) {
+							giveList.add(list.get(i));
+						} else {
+							takeList.add(list.get(i));
+						}
+
+					}
+				}
+
+				System.out.println(giveList);
+				System.out.println(takeList);
+
+				request.setAttribute("giveList", giveList);
+				request.setAttribute("takeList", takeList);
+				request.setAttribute("dto", dto);
+				request.setAttribute("clickPage", clickPage);
+
+				request.getRequestDispatcher("user/myPage/main.jsp").forward(request, response);
+			} catch (Exception e) {
+				response.sendRedirect("error.jsp");
+				e.printStackTrace();
+
+			}
 		}else if (realPath.contentEquals("/MyPoint.usboard")) {
 			//마이페이지 포인트
-			
+
 			String id = (String) request.getSession().getAttribute("id");
+			String clickPage = (String) request.getSession().getAttribute("clickPage");
 
 			try {
 				MemberDTO MemberDTO = MemberDAO.getInstance().select(id);
@@ -292,19 +297,22 @@ public class UserBoardServlet extends HttpServlet {
 
 				request.getRequestDispatcher("/user/myPage/point.jsp").forward(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 		}else if(realPath.contentEquals("/myPageDetailView.usboard")) {
 			//마이페이지 상세보기
-			
+
 			String id = request.getParameter("id");
+			String clickPage = (String) request.getSession().getAttribute("clickPage");
 			try {
 				MemberDTO MemberDTO = MemberDAO.getInstance().select(id);
 				request.setAttribute("list", MemberDTO);
-				request.getRequestDispatcher("user/myPage/detail.jsp").forward(request, response);
+				request.setAttribute("list", MemberDTO);
+
+				request.getRequestDispatcher("user/detail.jsp").forward(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 		}

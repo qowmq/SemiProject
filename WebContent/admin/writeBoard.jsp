@@ -70,14 +70,6 @@
                      type=file name=file1 style=" border-radius:4px; font-family: 'BMEULJIRO'; color:#1D1F21;">
                </tr>
                <tr>
-               		<td>
-               			<select name="day">
-               				<option value="all">월~
-               			</select>
-               		</td>
-               		<td></td>
-               </tr>
-               <tr>
                   <td><textarea name="content" rows="30" cols="100"></textarea>
                </tr>
                <tr>
@@ -103,13 +95,7 @@
                      </div> <br>
                </tr>
 
-               <tr>
-
-                  <td><br>
-                     <div style="text-align: center">
-                        End Date : <input type="text" name="enddate" id="endDatepicker">
-                     </div> <br>
-               </tr>
+              
                <tr>
                   <td align=right>
 
@@ -233,7 +219,15 @@
               if(result){
                  location.href="logout.mem";
               }
-              })
+      })
+      $("#startDatepicker").on("change",function(){
+    	 var startDate =  $("#startDatepicker").val();
+    	 console.log(startDate);
+    	 var dateTo = startDate.replace("-", "");
+    	 var dateTo2 = dateTo.replace("-", "");
+
+      })
+              
    </script>
 
    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

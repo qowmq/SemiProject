@@ -77,6 +77,26 @@ public class FileListDAO {
 		}
 
 	}
+	public List<File_ListDTO> selectAll() throws SQLException, Exception{
+		String sql="select * from file_list";
+		try(Connection conn = getConnection();
+				PreparedStatement pstat = conn.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery()){
+			List<File_ListDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				File_ListDTO dto = new File_ListDTO();
+				dto.setSeq(rs.getInt(1));
+				dto.setFile_name(rs.getString(2));
+				dto.setFile_path(rs.getString(3));
+				dto.setOriginal_name(rs.getString(4));
+				dto.setUpload_date(rs.getString(5));
+				dto.setChallenge_record_num(rs.getInt(6));
+
+				list.add(dto);
+			}
+			return list;
+		}
+	}
 
 	public int getSeq() throws SQLException, Exception {
 		String sql = "select * from file_list order by 1 desc";

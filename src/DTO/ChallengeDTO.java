@@ -1,7 +1,7 @@
 package DTO;
 
 public class ChallengeDTO {
-	
+
 	private int seq;
 	private String title;
 	private String content;
@@ -14,13 +14,10 @@ public class ChallengeDTO {
 	private String category;
 	private int pp_point;
 	private int total_amount;
-
-	public ChallengeDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private String detailContent;
 	public ChallengeDTO(int seq, String title, String content, String start_date, String end_date, String end,
-			int total_participate, String file_path, String giveortake,String category,int pp_point,int total_amount) {
+			int total_participate, String file_path, String giveortake, String category, int pp_point, int total_amount,
+			String detailContent) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -29,15 +26,16 @@ public class ChallengeDTO {
 		this.end_date = end_date;
 		this.end = end;
 		this.total_participate = total_participate;
-		this.file_path=file_path;
-		this.giveortake=giveortake;
-		this.category=category;
-		this.pp_point=pp_point;
-		this.total_amount=total_amount;
+		this.file_path = file_path;
+		this.giveortake = giveortake;
+		this.category = category;
+		this.pp_point = pp_point;
+		this.total_amount = total_amount;
+		this.detailContent = detailContent;
 	}
-	public ChallengeDTO(String end_date) {
+	public ChallengeDTO() {
 		super();
-		this.end_date = end_date;
+		// TODO Auto-generated constructor stub
 	}
 	public int getSeq() {
 		return seq;
@@ -67,7 +65,7 @@ public class ChallengeDTO {
 		return end_date;
 	}
 	public void setEnd_date(String end_date) {
-		this.end_date=end_date;
+		this.end_date = end_date;
 	}
 	public String getEnd() {
 		return end;
@@ -85,7 +83,7 @@ public class ChallengeDTO {
 		return file_path;
 	}
 	public void setFile_path(String file_path) {
-		this.file_path=file_path;
+		this.file_path = file_path;
 	}
 	public String getGiveortake() {
 		return giveortake;
@@ -111,6 +109,10 @@ public class ChallengeDTO {
 	public void setTotal_amount(int total_amount) {
 		this.total_amount = total_amount;
 	}
-	
-
+	public String getDetailContent() {
+		return detailContent;
+	}
+	public void setDetailContent(String detailContent) {
+		this.detailContent = detailContent;
+	}
 }

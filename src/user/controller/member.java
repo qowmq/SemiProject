@@ -15,9 +15,10 @@ import com.sun.media.jfxmedia.track.Track.Encoding;
 
 import DAO.MemberDAO;
 import DTO.MemberDTO;
+import oracle.net.aso.r;
 
 @WebServlet("*.mem")
-public class member extends HttpServlet {
+public class Member extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,29 +30,49 @@ public class member extends HttpServlet {
 		System.out.println(realPath);
 		//			System.out.println(ctx); 절대경로
 
-		if (realPath.contentEquals("/user/login/login.mem")) {
+		if(realPath.contentEquals("/user/login/loginPage.mem")){
+			String clickPage = request.getParameter("page");
+			request.getSession().setAttribute("clickPage", clickPage);
+			System.out.println(clickPage);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+
+		}
+		else if (realPath.contentEquals("/user/login/login.mem")) {
 			try {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
-				System.out.println(id + " : " + pw);
+				String clickPage = request.getParameter("page");
+				System.out.println(id + " : " + pw + ":" + clickPage);
 				boolean loginResult = dao.isAdmin(id, dao.encrypt(pw)); //dao.isLoginOK(id, dao.encrypt(pw));			
 				System.out.println("loginResult : " + loginResult);
 				if(loginResult) {
-
+					//admin 체크용
 					request.getSession().setAttribute("loginResult", loginResult);
 					request.getSession().setAttribute("id", id);
 					request.getRequestDispatcher("logincheck.jsp").forward(request, response);
 				}else {
+					//일반 사용자 체크용
 					boolean loginResult2 = dao.isLoginOK(id, dao.encrypt(pw));
 					request.getSession().setAttribute("loginResult2", loginResult2);
 					System.out.println("loginResult2 : " + loginResult2);
 					System.out.println("id : " + id);
-					request.getSession().setAttribute("id", id);
+
+					if(loginResult2) {
+						request.getSession().setAttribute("id", id);
+						if(clickPage.equals("donation")) {
+							request.setAttribute("page", "donation.challenge");
+						}else if(clickPage.equals("take")) {
+							request.setAttribute("page", "take.challenge");
+						}
+						request.setAttribute("clickPage", clickPage);
+					}
 					request.getRequestDispatcher("logincheck.jsp").forward(request, response);
+
 				}
 
 
 			} catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -79,6 +100,7 @@ public class member extends HttpServlet {
 				response.sendRedirect(ctx + "/user/login/signupcheck.jsp");
 
 			} catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 		}else if(realPath.contentEquals("/user/login/update.mem")) {
@@ -96,23 +118,91 @@ public class member extends HttpServlet {
 
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
-
-
-
-
 		}else if(realPath.contentEquals("/logout.mem")) {
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");
 
+			///아이디/비밀번호 찾기 ////////////////////////////////////////////////////////////////////////////////////////
+		}else if(realPath.contentEquals("/findid.mem")) {
+			request.setCharacterEncoding("utf8");
+			System.out.println("반갑수다");
+			try {
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				System.out.println(name + email);
+				List<MemberDTO> list = MemberDAO.getInstance().selectAll(name, email);
+				System.out.println(list.size());
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("user/login/findIdResult.jsp").forward(request, response);
+			}catch(Exception e) {
+				response.sendRedirect("error.jsp");
+				e.printStackTrace();
+			}
+		}else if(realPath.contentEquals("/findPwCheck.mem")) {
+			try {
+				String id = request.getParameter("id");
+				String email = request.getParameter("email");
+
+				Boolean isIdOK = MemberDAO.getInstance().isIdOk(id);
+				if(isIdOK) {
+					String pw1 = "";
+					for(int i =0; i<3; i++) {
+						double dValue = Math.random();
+						pw1+= (int)(dValue * 10);
+						pw1+= (char)((dValue * 26) + 97);
+					}
+					System.out.println("+++++++++++++++++++++++++++");
+					System.out.println("임시 비밀번호" +pw1);
+					System.out.println("+++++++++++++++++++++++++++");
+
+//
+//					int iValue1 = (int)(dValue * 10); // 정수
+//					int iValue2 = (int)(dValue * 10); // 정수
+//					int iValue3 = (int)(dValue * 10); // 정수
+//
+//					char cValue1 = (char)((dValue * 26) + 97); // 소문자
+//					char cValue2 = (char)((dValue * 26) + 97); // 소문자
+//					char cValue3 = (char)((dValue * 26) + 97); // 소문자
+
+					//String pw = (""+iValue1+cValue1+iValue2+cValue2+iValue3+cValue3);
+					int result2 =  MemberDAO.getInstance().updatePw(MemberDAO.getInstance().encrypt(pw1), id);
+					System.out.println("업데이트 여부 : "+result2);
+					boolean sendEmail = MemberDAO.getInstance().sendTempPW(email, id,pw1);
+
+					request.setAttribute("id", id);
+					request.setAttribute("email", email);
+					request.setAttribute("sendEmail", sendEmail);
+				}
+				request.setAttribute("isIdOK", isIdOK);
+				System.out.println(isIdOK);
+				request.getRequestDispatcher("user/login/findPwCheck.jsp").forward(request, response);
+			}catch (Exception e) {
+				response.sendRedirect("error.jsp");
+				e.printStackTrace();
+			}
+
+		}else if(realPath.contentEquals("/findpw.mem")) {
+			request.setCharacterEncoding("utf8");
+
+			try {
+				String email = request.getParameter("email");
+				System.out.println(email);
+				request.setAttribute("email", email);
+				request.getRequestDispatcher("/user/login/findPwResult.jsp").forward(request, response);
+
+			}catch (Exception e) {
+				response.sendRedirect("error.jsp");
+				e.printStackTrace();
+			}
 			/////////////////////////////////////////////////////////////////////////////////
 			//ADMIN
 		}else if(realPath.contentEquals("/admin/logout.mem")) {
 			request.getSession().invalidate();
 			response.sendRedirect(ctx+ "/index.jsp");
-		
+
 		}else if(realPath.contentEquals("/admin/memberlist.mem")) { //멤버리스트 클릭했을때 주소받아오기
 			request.setCharacterEncoding("utf8");
 			try {
@@ -133,6 +223,7 @@ public class member extends HttpServlet {
 
 
 			}catch(Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -148,6 +239,7 @@ public class member extends HttpServlet {
 
 
 			}catch(Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 		}else if(realPath.contentEquals("/delete.mem")) {
@@ -160,7 +252,7 @@ public class member extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 

@@ -119,7 +119,7 @@
 			}
 		})
 		$("#mypage").on("click", function() {
-			location.href = "banner.usboard";
+			location.href = "banner.usboard?page=donation";
 		})
 		$("#adminpage").on("click", function() {
 			location.href = "admin/adminMyPage.jsp";
@@ -190,7 +190,7 @@
 					<c:choose>
 						<c:when test="${loginResult2 == null }">
 							<a
-								href="${pageContext.request.contextPath }/user/login/login.jsp"
+								href="${pageContext.request.contextPath }/user/login/loginPage.mem?page=donation"
 								class="login">로그인</a>
 							<a
 								href="${pageContext.request.contextPath }/user/login/signup.jsp"

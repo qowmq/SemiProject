@@ -12,13 +12,14 @@
   <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <title>Document</title>
+  
+  <title>document</title>
   <script type="text/javascript">
     window.onload = function () {
-      $('.startBtn').click(function () {
+      $('.startbtn').click(function () {
         var $layer = $('.js-layer');
-        $layer.fadeIn();
-        $(".backgroundImg").css("opacity","0.6");
+        $layer.fadein();
+        $(".backgroundimg").css("opacity","0.6");
         $(".explan").css("display","none");
       });
       $(".naviStartBtn").on("click",function(){

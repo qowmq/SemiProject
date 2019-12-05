@@ -114,7 +114,7 @@
                      <div class="col-4">
 
                         <a
-                           href="${pageContext.request.contextPath}/myPageDetailView.usboard?challengeSeq=${dto.seq}">
+                          href="${pageContext.request.contextPath}/myBoardDetailView.usboard?challengeSeq=${dto.seq}">
                            <div class="card m-3">
                               <img src="${dto.file_path}" class="card-img-top">
                               <div class="card-body">
@@ -241,7 +241,14 @@
    </div>
    <ul class="navi">
       <ul class="title">
-         <li class="navi-title"><a href="donation.challenge" style="font-family: 'Rock Salt', cursive; font-size:20px;">Don't Give Up</a></li>
+         <li class="navi-title">
+      	 <c:if test="${clickPage == 'take'}">
+         		 <a href="take.challenge" style="font-family: 'Rock Salt', cursive; font-size:20px;">Don't Give Up</a></li>
+         	</c:if>
+
+         	<c:if test="${clickPage == 'donation'}">
+         		<a href="donation.challenge" style="font-family: 'Rock Salt', cursive; font-size:20px;">Don't Give Up</a></li>
+         	</c:if>
       </ul>
       <ul class="itemList">
             <li class="navi-item"></li>

@@ -61,10 +61,10 @@ public class ChallengeServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("Main/takeMain.jsp");
 				rd.forward(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -85,7 +85,7 @@ public class ChallengeServlet extends HttpServlet {
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("Main/donateMain.jsp").forward(request, response);
 			} catch (Exception e) {
-				System.out.println("djdkd");
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 
 			}

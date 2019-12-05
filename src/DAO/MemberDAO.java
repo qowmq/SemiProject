@@ -10,9 +10,19 @@ import java.util.List;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
+
 import DTO.MemberDTO;
 import adminboardCongiuration.Configuration;
 
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class MemberDAO {
 
@@ -92,7 +102,7 @@ public class MemberDAO {
 	}
 
 	public MemberDTO select(String id) throws Exception{ //아이디로 멤버검색
-		String sql = "select * from member where id=?";
+		String sql = "select * from member where id = ?";
 		try(Connection con = getConnection();
 				PreparedStatement psta = con.prepareStatement(sql);){
 			MemberDTO mypage = null;
@@ -151,13 +161,13 @@ public class MemberDAO {
 
 	public List<MemberDTO> search(String id) throws Exception{
 		//아이디로 검색
-		String sql = "select * from member where id = ?";
+		String sql = "select * from member where id like ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 
-			pstat.setString(1, id);
+			pstat.setString(1, "%"+id+"%");
 			try(ResultSet rs = pstat.executeQuery();){
 				List<MemberDTO> list = new ArrayList<>();
 				while(rs.next()) {
@@ -217,7 +227,7 @@ public class MemberDAO {
 
 	public int selectByPoint(String id) throws Exception{
 		String sql = "select * from member where id = ?";
-		
+
 		try(Connection conn = this.getConnection();
 				PreparedStatement pstat = new LoggableStatement(conn, sql);){
 			pstat.setString(1, id);
@@ -231,7 +241,7 @@ public class MemberDAO {
 			}
 		}
 	}
-	
+
 	public int updateByPoint(String id, int point) throws Exception {
 		String sql ="update member set point = ? where id = ?";
 
@@ -303,7 +313,128 @@ public class MemberDAO {
 			return result;
 		}
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	public List<MemberDTO> selectAll(String name1,String email1) throws Exception{
+		String sql = "select * from member where name=? and email=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
 
+				){
+			pstat.setString(1, name1);
+			pstat.setString(2, email1);
+			try(
+					ResultSet rs = pstat.executeQuery();){
+				List<MemberDTO> list = new ArrayList<>();
+				while(rs.next()){
+					int seq = rs.getInt("seq");
+					String id = rs.getString("id");
+					String pw = rs.getString("pw");
+					String name = rs.getString("name");
+					String phone = rs.getString("phone");
+					String email = rs.getString("email");
+					int point = rs.getInt("point");
+					String getout = rs.getNString("getout");
+
+					MemberDTO dto = new MemberDTO(seq, id, pw, name, phone, email, point, getout);
+					list.add(dto);
+
+				}
+				return list;
+			}
+		}   
+
+	}
+	public MemberDTO selectAll2(String id1,String email1) throws Exception{
+		String sql = "select * from member where id=? and email=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+
+				){
+			pstat.setString(1, id1);
+			pstat.setString(2, email1);
+			try(
+					ResultSet rs = pstat.executeQuery();){
+				MemberDTO dto = new MemberDTO();
+				if(rs.next()){
+					int seq = rs.getInt("seq");
+					String id = rs.getString("id");
+					String pw = rs.getString("pw");
+					String name = rs.getString("name");
+					String phone = rs.getString("phone");
+					String email = rs.getString("email");
+					int point = rs.getInt("point");
+					String getout = rs.getNString("getout");
+
+					dto = new MemberDTO(seq, id, pw, name, phone, email, point, getout);
+				}
+				return dto;
+			}
+		}   
+
+	}
+
+	public int updatePw(String pw,String id)throws Exception{
+		String sql = "update member set pw = ? where id = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, pw);
+			pstat.setString(2, id);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+
+	public boolean sendTempPW(String email,String id, String pw) throws Exception {
+		String host = "smtp.naver.com";
+		final String user = "artech33@naver.com";
+		final String password = "ehsrlqmdjq";
+
+		String to = email;
+		
+		// Get the session object
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
+
+		// Compose the message
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user, "Don't Give Up"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			String title = "[Don't Give Up] 임시 비밀번호 안내입니다.";
+			String content ="<br>" + id + "님의 임시 비밀번호 안내입니다." + "<br>임시 비밀번호:<b>" 
+					+ pw + "</b>";
+			
+			// Subject
+			message.setSubject(MimeUtility.encodeText(title, "UTF-8", "B"));
+
+			// Text
+			message.setContent(content, "text/html; charset=UTF-8");
+			//message.setText("당신의 임시 비밀번호는 : "+ pw );
+
+			// send the message
+			Transport.send(message);
+			System.out.println("message sent successfully...");
+			return true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////
 
 	public String getPageNavi(int currentPage) throws Exception { //게시판에서 페이지 넘기기 (int 값은 모두 예시)
 		// 필요정보 : 게시판 내의 총 글의 갯수, 한 페이지에 몇개의 글을 보여줄것인지, 한 화면에 페이지값을 몇개 보여줄것인지

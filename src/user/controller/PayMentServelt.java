@@ -68,6 +68,7 @@ public class PayMentServelt extends HttpServlet {
 
 					request.getRequestDispatcher("/user/pay/close.jsp").forward(request, response);
 				} catch (Exception e) {
+					response.sendRedirect("error.jsp");
 					e.printStackTrace();
 				}
 
@@ -94,6 +95,7 @@ public class PayMentServelt extends HttpServlet {
 					}
 				}
 			}catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -112,6 +114,7 @@ public class PayMentServelt extends HttpServlet {
 
 				request.getRequestDispatcher("/user/pay/charge.jsp").forward(request, response);
 			}catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 
@@ -125,6 +128,7 @@ public class PayMentServelt extends HttpServlet {
 					request.getRequestDispatcher("/user/pay/refunds.jsp").forward(request, response);
 				}
 			}catch (Exception e) {
+				response.sendRedirect("error.jsp");
 				e.printStackTrace();
 			}
 		}

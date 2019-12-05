@@ -21,7 +21,7 @@
 			<c:when test="${loginResult2 == true }">
 				<script>
 					alert("로그인에 성공하였습니다.");
-					location.href = "${uri}"
+					location.href = "${pageContext.request.contextPath}/${page}"
 				</script>
 			</c:when>
 			<c:otherwise>

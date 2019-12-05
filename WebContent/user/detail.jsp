@@ -222,7 +222,6 @@ body {
 	border-radius: 10px;
 }
 
-
 #noenjoybtn {
 	font-size: 22px;
 	background-color: black;
@@ -233,6 +232,7 @@ body {
 	font-family: '양진체';
 	border-radius: 10px;
 }
+
 .submenu {
 	font-family: 'Calistoga', cursive;
 	color: black;
@@ -330,9 +330,7 @@ body {
 			style="width: 100%; filter: blur(4px); z-index: -500; position: fixed">
 	</div>
 	<div class="container">
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 		<div class="topfloor">
 			<div class="bd-example"></div>
 
@@ -355,7 +353,7 @@ body {
 
 		<div class="fivefloor">
 			<br>
-			<div id="method">챌린지 진행 방식</div>
+			<div class="method">챌린지 진행 방식</div>
 			<br>
 			<div>🗓 인증 가능 요일 : ${day }</div>
 			<br>
@@ -365,6 +363,10 @@ body {
 			<br>
 			<div>📌 하루 인증 횟수 : ${number }</div>
 			<br>
+
+			<div class="method">설명</div>
+			<br>
+			<div style="white-space: pre-line;">${detailpage.detailContent}</div>
 		</div>
 		<div class="bonusfloor">
 			<br> <br>
@@ -378,17 +380,16 @@ body {
 		<div class="rfloor">
 			<br> <br> <br> <br>
 			<h1>📢레드카드발급 관련 공통 안내사항</h1>
-			<br>
-			<br>
-			<br> ✔ 인증규정과 무관한 이미지로 인증을 대체하려 한 경우<br> ✔ 신체의 일부가 나와야 할 때
-			본인이 아닌 경우<br> ✔ 한번의 행위로 2회 인증하는 경우(예. 자정전과 후로 한 챌린지를 2회 인증하는 경우)<br>
-			✔ 미리 해놓고 다음에는 사진만 찍는 경우<br> ✔ 한 번의 행위로 두 개의 서로 다른 챌린지에 인증하는 경우<br>
-			(예. 닭가슴살 샐러드를 먹으며, 닭가슴살 먹기 챌린지와 샐러드 먹기 챌린지에 둘 다 인증하는 경우)<br> ✔
-			미리 해놓고 인증샷은 나중에 찍는 경우 <br> (예. 한 주 할 일을 모두 계획 후 미리 써두고, 밤에는 사진만
-			찍는 경우)<br> ✔ 다수의 회원들로부터 수행여부를 의심받았는데, 회사가 그 의심이 납득 가능하다고 판단한 경우<br>
-			✔ 고의적으로 인증규정만 맞췄을 뿐 인증규정의 빈틈을 노렸다고 회사가 판단하는 경우<br> ✔ 한 사람이 두
-			계정으로 인증하거나, 지인이 인증할 때를 이용해 본인도 인증하는 경우<br> (예. 아메리카노 한 잔을 두고, 두
-			사람이 카페에서 아메리카노 주문하기 챌린지에 인증한 경우)<br> <br> <br> <br>
+			<br> <br> <br> ✔ 인증규정과 무관한 이미지로 인증을 대체하려 한 경우<br>
+			✔ 신체의 일부가 나와야 할 때 본인이 아닌 경우<br> ✔ 한번의 행위로 2회 인증하는 경우(예. 자정전과 후로
+			한 챌린지를 2회 인증하는 경우)<br> ✔ 미리 해놓고 다음에는 사진만 찍는 경우<br> ✔ 한 번의
+			행위로 두 개의 서로 다른 챌린지에 인증하는 경우<br> (예. 닭가슴살 샐러드를 먹으며, 닭가슴살 먹기 챌린지와
+			샐러드 먹기 챌린지에 둘 다 인증하는 경우)<br> ✔ 미리 해놓고 인증샷은 나중에 찍는 경우 <br>
+			(예. 한 주 할 일을 모두 계획 후 미리 써두고, 밤에는 사진만 찍는 경우)<br> ✔ 다수의 회원들로부터
+			수행여부를 의심받았는데, 회사가 그 의심이 납득 가능하다고 판단한 경우<br> ✔ 고의적으로 인증규정만 맞췄을 뿐
+			인증규정의 빈틈을 노렸다고 회사가 판단하는 경우<br> ✔ 한 사람이 두 계정으로 인증하거나, 지인이 인증할 때를
+			이용해 본인도 인증하는 경우<br> (예. 아메리카노 한 잔을 두고, 두 사람이 카페에서 아메리카노 주문하기
+			챌린지에 인증한 경우)<br> <br> <br> <br>
 
 		</div>
 

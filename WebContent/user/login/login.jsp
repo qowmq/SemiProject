@@ -255,7 +255,6 @@ th {
             request.getSession().setAttribute("uri", uri);
          %>
 
-
          <form action="login.mem" method="post" id="loginfrm">
             <section class="sign-in">
                <div class="container">
@@ -284,9 +283,12 @@ th {
                               class="form-submit" value="Log in" />
                               <div class="signUp"
                            style="margin: auto; padding: 20px 0px 0px 0px; color: gray; opacity:0.5; font-size:2px;">
-                           <a href="signup.jsp">회원가입</a>│<a href="#">아이디</a>│<a href="#">비밀번호찾기</a>
+                           <a href="signup.jsp">회원가입</a>
+                           │<a href="findId.jsp">아이디</a>
+                           │<a href="findPw.jsp">비밀번호찾기</a>
                         </div> 
-                        </div>                        
+                        </div>         
+                        <input type="hidden" name="page" value="${clickPage}">               
                      </div>
                   </div>
                </div>
